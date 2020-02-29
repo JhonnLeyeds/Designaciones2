@@ -8,15 +8,24 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
     //Mostrar una lista de los registros
-    public function index()
+    public function index(Request $request)
     {
-        $users = User::all();
-        return view('usuarios.index' , ['users' => $users]);
+
+        if($request){
+            $query = trim($request->get('search'));
+            $users = User::where('name', 'LIKE' , '%' . $query . '%' )
+            ->orderBy('id' , 'asc')
+            ->paginate(10);
+
+            return view('usuarios.index' , ['users' => $users , 'search'=> $query ]);
+        }
+        // $users = User::all();
+        // return view('usuarios.index' , ['users' => $users]);
     }
 
     //Mostrar el formulario para crear un nuevo registro
@@ -33,7 +42,7 @@ class UserController extends Controller
 
         $usuario->name = request ('name');
         $usuario->email = request ('email');
-        $usuario->password = request ('password');
+        $usuario->password = bcrypt(request ('password'));
 
         $usuario->save();
         return redirect('/usuarios');
@@ -53,7 +62,8 @@ class UserController extends Controller
     }
 
     //Actualizar un registro en la BD
-    public function update(UserFormRequest $request, $id)
+    //UserForm
+    public function update(Request $request, $id)
     {
         $usuario =  User::findOrFail($id);
 

@@ -28,6 +28,7 @@ class UserFormRequest extends FormRequest
             'email' => 'required|email|max:255|unique:users',
             'password' => 'bcrypt|min:6|confirmed'
 
+
         ];
     }
 }

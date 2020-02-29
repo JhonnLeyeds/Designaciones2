@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Designaciones</title>
+    <title>AdminLTE 3</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -25,7 +25,6 @@
     <!-- Styles -->
     <link href="{{ asset('dist/css/adminlte.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -44,7 +43,7 @@
                 <!-- SEARCH FORM -->
                 <form class="form-inline ml-3">
                     <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search"
+                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
                             aria-label="Search">
                         <div class="input-group-append">
                             <button class="btn btn-navbar" type="submit">
@@ -155,9 +154,9 @@
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 <!-- Brand Logo -->
                 <a href="{{ url('/') }}" class="brand-link">
-                    <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                    <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
                         style="opacity: .8">
-                    <span class="brand-text font-weight-light">DESIGNACIONES</span>
+                    <span class="brand-text font-weight-light">System Team</span>
                 </a>
 
                 <!-- Sidebar -->
@@ -165,7 +164,7 @@
                     <!-- Sidebar user panel (optional) -->
                     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                         <div class="image">
-                            <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+                            <img src="dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                         </div>
                         <div class="info">
                             <a href="#" class="d-block">
@@ -200,27 +199,8 @@
                                 </a>
                             </li>
 
-                        <li class="nav-item">
-                            <a href="{{url('estudiantes')}}"
-                                class="{{ Request::path() === 'estudiantes' ? 'nav-link active' : 'nav-link' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Estudiantes
-
-                                </p>
-                            </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a href="{{url('ejemplo')}}"
-                                class="{{ Request::path() === 'ejemplo' ? 'nav-link active' : 'nav-link' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Designacion</p>
-                            </a>
-                        </li>
-
-
                             <li class="nav-item">
-                                <a href="{{url('usuarios')}}"
+                                <a href="usuarios"
                                     class="{{ Request::path() === 'usuarios' ? 'nav-link active' : 'nav-link' }}">
                                     <i class="nav-icon fas fa-users"></i>
                                     <p>
@@ -231,18 +211,17 @@
                                 </a>
                             </li>
 
-
                             <li class="nav-item has-treeview">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon far fa-sticky-note"></i>
-                                    <p>Configuraciones<i class="fas fa-angle-left right"></i></p>
+                                    <p>Notas<i class="fas fa-angle-left right"></i></p>
                                 </a>
                                 <ul class="nav nav-treeview">
                                     <li class="nav-item">
-                                        <a href="Conguracion/Agregar"
+                                        <a href="notas/todas"
                                             class="{{ Request::path() === 'notas/todas' ? 'nav-link active' : 'nav-link' }}">
                                             <i class="far fa-circle nav-icon"></i>
-                                            <p>Nuevo Item</p>
+                                            <p>Todas</p>
                                         </a>
                                     </li>
                                     <li class="nav-item">
@@ -280,14 +259,13 @@
                 <!-- Main content -->
                 <section class="content">
                     @yield('content')
-
                 </section>
                 <!-- /.content -->
             </div>
             <!-- /.content-wrapper -->
             <footer class="main-footer">
                 <!-- NO QUITAR -->
-                <strong>SEDES 2020
+                <strong>Tutoriales YouTube
                     <div class="float-right d-none d-sm-inline-block">
                         <b>Version</b> 1.0
                     </div>
@@ -300,11 +278,6 @@
             <!-- /.control-sidebar -->
         </div>
     </div>
-
-
 </body>
-
-<script src="{{ asset('js/jquery-3.4.1.min.js') }}" ></script>
-<script src="{{ asset('js/select.js') }}" ></script>
 
 </html>
