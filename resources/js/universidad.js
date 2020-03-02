@@ -18,8 +18,3 @@
     loadarea();
     $('#departamentos').on('change', loadarea);
 });*/
-$(function(){
-    $(document).on('change','.cargar_uni_inst',function(e){
-        alert("llega");
-    });
-});

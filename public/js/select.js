@@ -1,12 +1,56 @@
-//id = especifica el state ,
-//event.target = obtenemos el compoentente donde se genera el evento  , value= el id de nuestro facultdad
 $(function(){
+    $('.load_url').click(function(){ 
+        load_url = $(this).attr('href')   
+        $("#global_content").html('')
+        $("#global_content").load(load_url)
+        return false;
+    });
+    $(document).on('submit','.save_date',function(e){
+        console.log("asdasdas")
+        var formData = new FormData($(this)[0]);
+        frutas = []
+        $('.name_form').each(function(){
+            aux = $(this).attr("name")
+            frutas.push(aux)
+        })
+        $.ajaxSetup({
+            header:$('meta[name="_token"]').attr('content')
+        })
+        e.preventDefault(e)
+        $.ajax({
+            type:$(this).attr('method'),
+            url:$(this).attr('action'),
+            data:formData,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                $("#global_content").html(data)
+            },
+            error:function(data){
+                function_error(data)
+                
+            }
+        })
+    })
+    $(document).on('click','.click_charge_button',function(e){
+        e.preventDefault(e)
+        $.ajax({
+        	type:'GET',
+        	url:$(this).attr('href'),
+        	data:{},
+        	success:function(data){
+                $("#global_content").html(data)
+                return false;   
+        	},
+        	error:function(data){
+        	}
+        })
+    });
     $(document).on('change','#departamento',function(e){
     	$('.delete_uni option').remove();
         $('.delete_inst option').remove();
         $('.load_carrer_inti').prop('disabled', false);
         $('.load_carrer_uni').prop('disabled', false);
-        //alert($(this).find(":selected").val());delete_inst
         e.preventDefault(e)
         $.ajax({
         	type:'POST',
@@ -61,4 +105,17 @@ $(function(){
             }
         })
     })
+    function function_error(data){
+        var asd = Object.keys(data.responseJSON.errors)
+        console.log(asd)
+        //console.log(data.responseJSON.errors[frutas[0]][0])
+        for(i = 0; i<frutas.length; i++){
+            if(asd.includes(frutas[i])) {
+                //console.log(data.responseJSON.errors[frutas[0]][0])
+                $( "input[name='"+frutas[i]+"']" ).parent().find("small").text(data.responseJSON.errors[frutas[i]][0])                        
+            }else{
+                $( "input[name='"+frutas[i]+"']" ).parent().find("small").text('')                        
+            }
+        }
+    } 
 });

@@ -9,13 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "caffeinated/shinobi": "^5.0",
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.9",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
-        "laravelcollective/html": "^6.0",
-        "spatie/laravel-permission": "^3.7"
+        "laravelcollective/html": "^6.0"
     },
     "require-dev": {
         "facade/ignition": "1.4",
