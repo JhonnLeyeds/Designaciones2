@@ -1,5 +1,4 @@
-$(function(){
-    alert('asdasdsad')
+$(function(){    
     $('.load_url').click(function(){
         load_url = $(this).attr('href')
         $("#global_content").html('')
