@@ -1,6 +1,7 @@
 $(function(){
-    $('.load_url').click(function(){ 
-        load_url = $(this).attr('href')   
+    alert('asdasdsad')
+    $('.load_url').click(function(){
+        load_url = $(this).attr('href')
         $("#global_content").html('')
         $("#global_content").load(load_url)
         return false;
@@ -28,7 +29,7 @@ $(function(){
             },
             error:function(data){
                 function_error(data)
-                
+
             }
         })
     })
@@ -40,7 +41,7 @@ $(function(){
         	data:{},
         	success:function(data){
                 $("#global_content").html(data)
-                return false;   
+                return false;
         	},
         	error:function(data){
         	}
@@ -112,10 +113,10 @@ $(function(){
         for(i = 0; i<frutas.length; i++){
             if(asd.includes(frutas[i])) {
                 //console.log(data.responseJSON.errors[frutas[0]][0])
-                $( "input[name='"+frutas[i]+"']" ).parent().find("small").text(data.responseJSON.errors[frutas[i]][0])                        
+                $( "input[name='"+frutas[i]+"']" ).parent().find("small").text(data.responseJSON.errors[frutas[i]][0])
             }else{
-                $( "input[name='"+frutas[i]+"']" ).parent().find("small").text('')                        
+                $( "input[name='"+frutas[i]+"']" ).parent().find("small").text('')
             }
         }
-    } 
+    }
 });
