@@ -12,8 +12,122 @@ Route::middleware(['auth'])->group(function(){
     Route::get('roles','RoleController@index')->name('index_roles')->middleware('permission:index_roles');
     Route::get('create_roles','RoleController@create')->name('create_roles')->middleware('permission:create_roles');
     Route::post('store_roles','RoleController@store')->name('store_roles')->middleware('permission:store_roles');
+    Route::post('delete_role','RoleController@delete')->name('delete_role')->middleware('permission:delete_roles');
+    Route::post('show_role','RoleController@show')->name('show_role')->middleware('permission:show_roles');
+    Route::post('edit_role','RoleController@edit')->name('edit_role')->middleware('permission:edit_roles');
+    Route::post('update_role/{role}','RoleController@update')->name('update_role')->middleware('permission:update_roles');
     //Fin Rutas para los roles del sistema
 
+    //Rutas para Usuarios
+    Route::get('users','UserController@index')->name('index_users')->middleware('permission:index_users');
+    Route::get('create_users','UserController@create')->name('create_users')->middleware('permission:create_users');
+    Route::post('delete_users','UserController@delete')->name('delete_users')->middleware('permission:delete_users');
+    Route::post('edit_users','UserController@edit')->name('edit_users')->middleware('permission:edit_users');
+    Route::post('show_users','UserController@show')->name('show_users')->middleware('permission:show_users');
+    Route::post('store_users','UserController@store')->name('store_users')->middleware('permission:store_users');
+    Route::post('update_user/{user}','UserController@update')->name('update_user')->middleware('permission:update_users');
+
+    //Rutas para Estudiantes
+    Route::get('students','StudentController@index')->name('index_students')->middleware('permission:index_students');
+    Route::get('create_students','StudentController@create')->name('create_students')->middleware('permission:create_students');
+    Route::post('delete_students','StudentController@delete_students')->name('delete_students')->middleware('permission:delete_students');
+    Route::post('edit_students','StudentController@edit_students')->name('edit_students')->middleware('permission:edit_students');
+    Route::post('show_students','StudentController@show_students')->name('show_students')->middleware('permission:show_students');
+    Route::post('store_students','StudentController@store_students')->name('store_students')->middleware('permission:store_students');
+    Route::post('update_students/{user}','StudentController@update_students')->name('update_students')->middleware('permission:update_students');
+
+    //Rutas para departamentos...
+    Route::get('departments','ConguracionController@index_departments')->name('index_departments')->middleware('permission:index_departments');
+    Route::get('create_departments','ConguracionController@create_departments')->name('create_departments')->middleware('permission:create_departments');
+    Route::post('store_departments','ConguracionController@store_departments')->name('store_departments')->middleware('permission:store_departments');
+    Route::post('delete_departments','ConguracionController@delete_departments')->name('delete_departments')->middleware('permission:delete_departments');
+    Route::post('show_departments','ConguracionController@show_departments')->name('show_departments')->middleware('permission:show_departments');
+    Route::post('edit_departments','ConguracionController@edit_departments')->name('edit_departments')->middleware('permission:edit_departments');
+    Route::post('update_departments/{departamento}','ConguracionController@update_departments')->name('update_departments')->middleware('permission:update_departments');
+
+    //Rutas para Provincias
+    Route::get('provinces','ConguracionController@index_provinces')->name('index_provinces')->middleware('permission:index_provinces');
+    Route::get('create_provinces','ConguracionController@create_provinces')->name('create_provinces')->middleware('permission:create_provinces');
+    Route::post('store_provinces','ConguracionController@store_provinces')->name('store_provinces')->middleware('permission:store_provinces');
+    Route::post('delete_provinces','ConguracionController@delete_provinces')->name('delete_provinces')->middleware('permission:delete_provinces');
+    Route::post('show_provinces','ConguracionController@show_provinces')->name('show_provinces')->middleware('permission:show_provinces');
+    Route::post('edit_provinces','ConguracionController@edit_provinces')->name('edit_provinces')->middleware('permission:edit_provinces');
+    Route::post('update_provinces/{id}','ConguracionController@update_provinces')->name('update_provinces')->middleware('permission:update_provinces');
+
+    //Rutas para Municipios
+    Route::get('municipalities','ConguracionController@index_municipalities')->name('index_municipalities')->middleware('permission:index_municipalities');
+    Route::get('create_municipalities','ConguracionController@create_municipalities')->name('create_municipalities')->middleware('permission:create_municipalities');
+    Route::post('store_municipalities','ConguracionController@store_municipalities')->name('store_municipalities')->middleware('permission:store_municipalities');
+    Route::post('delete_municipalities','ConguracionController@delete_municipalities')->name('delete_municipalities')->middleware('permission:delete_municipalities');
+    Route::post('show_municipalities','ConguracionController@show_municipalities')->name('show_municipalities')->middleware('permission:show_municipalities');
+    Route::post('edit_municipalities','ConguracionController@edit_municipalities')->name('edit_municipalities')->middleware('permission:edit_municipalities');
+    Route::post('update_municipalities/{id}','ConguracionController@update_municipalities')->name('update_municipalities')->middleware('permission:update_municipalities');
+        //Rutas para cargar datos para municipios
+        Route::post('load_prov','ConguracionController@load_prov')->name('load_prov');
+    //Rutas para Comunidades
+    Route::get('communities','ConguracionController@index_communities')->name('index_communities')->middleware('permission:index_communities');
+    Route::get('create_communities','ConguracionController@create_communities')->name('create_communities')->middleware('permission:create_communities');
+    Route::post('store_communities','ConguracionController@store_communities')->name('store_communities')->middleware('permission:store_communities');
+    Route::post('delete_communities','ConguracionController@delete_communities')->name('delete_communities')->middleware('permission:delete_communities');
+    Route::post('show_communities','ConguracionController@show_communities')->name('show_communities')->middleware('permission:show_communities');
+    Route::post('edit_communities','ConguracionController@edit_communities')->name('edit_communities')->middleware('permission:edit_communities');
+    Route::post('update_communities/{id}','ConguracionController@update_communities')->name('update_communities')->middleware('permission:update_communities');
+        //Rutas para cargar datos para municipios
+        Route::post('load_prov_muni','ConguracionController@load_prov_muni')->name('load_prov_muni');
+
+    //Rutas para Centro Medicos
+    Route::get('medicalCenter','EstableSaludController@index_medicalCenter')->name('index_medicalCenter')->middleware('permission:index_medicalCenter');
+    Route::get('create_medicalCenter','EstableSaludController@create_medicalCenter')->name('create_medicalCenter')->middleware('permission:create_medicalCenter');
+    Route::post('store_medicalCenter','EstableSaludController@store_medicalCenter')->name('store_medicalCenter')->middleware('permission:store_medicalCenter');
+    Route::post('delete_medicalCenter','EstableSaludController@delete_medicalCenter')->name('delete_medicalCenter')->middleware('permission:delete_medicalCenter');
+    Route::post('show_medicalCenter','EstableSaludController@show_medicalCenter')->name('show_medicalCenter')->middleware('permission:show_medicalCenter');
+    Route::post('edit_medicalCenter','EstableSaludController@edit_medicalCenter')->name('edit_medicalCenter')->middleware('permission:edit_medicalCenter');
+    Route::post('update_medicalCenter/{id}','EstableSaludController@update_medicalCenter')->name('update_medicalCenter')->middleware('permission:update_medicalCenter');
+
+    //Rutas para Universidades
+    Route::get('universities','UniversityController@index_universities')->name('index_universities')->middleware('permission:index_universities');
+    Route::get('create_universities','UniversityController@create_universities')->name('create_universities')->middleware('permission:create_universities');
+    Route::post('store_universities','UniversityController@store_universities')->name('store_universities')->middleware('permission:store_universities');
+    Route::post('delete_universities','UniversityController@delete_universities')->name('delete_universities')->middleware('permission:delete_universities');
+    Route::post('show_universities','UniversityController@show_universities')->name('show_universities')->middleware('permission:show_universities');
+    Route::post('edit_universities','UniversityController@edit_universities')->name('edit_universities')->middleware('permission:edit_universities');
+    Route::post('update_universities/{id}','UniversityController@update_universities')->name('update_universities')->middleware('permission:update_universities');
+
+    //Rutas para Facultades
+    Route::get('faculties','UniversityController@index_faculties')->name('index_faculties')->middleware('permission:index_faculties');
+    Route::get('create_faculties','UniversityController@create_faculties')->name('create_faculties')->middleware('permission:create_faculties');
+    Route::post('store_faculties','UniversityController@store_faculties')->name('store_faculties')->middleware('permission:store_faculties');
+    Route::post('delete_faculties','UniversityController@delete_faculties')->name('delete_faculties')->middleware('permission:delete_faculties');
+    Route::post('show_faculties','UniversityController@show_faculties')->name('show_faculties')->middleware('permission:show_faculties');
+    Route::post('edit_faculties','UniversityController@edit_faculties')->name('edit_faculties')->middleware('permission:edit_faculties');
+    Route::post('update_faculties/{id}','UniversityController@update_faculties')->name('update_faculties')->middleware('permission:update_faculties');
+
+    //Rutas para Carreras
+    Route::get('careers','UniversityController@index_careers')->name('index_careers')->middleware('permission:index_careers');
+    Route::get('create_careers','UniversityController@create_careers')->name('create_careers')->middleware('permission:create_careers');
+    Route::post('store_careers','UniversityController@store_careers')->name('store_careers')->middleware('permission:store_careers');
+    Route::post('delete_careers','UniversityController@delete_careers')->name('delete_careers')->middleware('permission:delete_careers');
+    Route::post('show_careers','UniversityController@show_careers')->name('show_careers')->middleware('permission:show_careers');
+    Route::post('edit_careers','UniversityController@edit_careers')->name('edit_careers')->middleware('permission:edit_careers');
+    Route::post('update_careers/{id}','UniversityController@update_careers')->name('update_careers')->middleware('permission:update_careers');
+
+    //Rutas para institutos
+    Route::get('institutes','InstituteController@index_institutes')->name('index_institutes')->middleware('permission:index_institutes');
+    Route::get('create_institutes','InstituteController@create_institutes')->name('create_institutes')->middleware('permission:create_institutes');
+    Route::post('store_institutes','InstituteController@store_institutes')->name('store_institutes')->middleware('permission:store_institutes');
+    Route::post('delete_institutes','InstituteController@delete_institutes')->name('delete_institutes')->middleware('permission:delete_institutes');
+    Route::post('show_institutes','InstituteController@show_institutes')->name('show_institutes')->middleware('permission:show_institutes');
+    Route::post('edit_institutes','InstituteController@edit_institutes')->name('edit_institutes')->middleware('permission:edit_institutes');
+    Route::post('update_institutes/{id}','InstituteController@update_institutes')->name('update_institutes')->middleware('permission:update_institutes');
+
+    //Rutas para carreras de los institutos
+    Route::get('careers_institutes','InstituteController@index_careers_institutes')->name('index_careers_institutes')->middleware('permission:index_careers_institutes');
+    Route::get('create_careers_institutes','InstituteController@create_careers_institutes')->name('create_careers_institutes')->middleware('permission:create_careers_institutes');
+    Route::post('store_careers_institutes','InstituteController@store_careers_institutes')->name('store_careers_institutes')->middleware('permission:store_careers_institutes');
+    Route::post('delete_careers_institutes','InstituteController@delete_careers_institutes')->name('delete_careers_institutes')->middleware('permission:delete_careers_institutes');
+    Route::post('show_careers_institutes','InstituteController@show_careers_institutes')->name('show_careers_institutes')->middleware('permission:show_careers_institutes');
+    Route::post('edit_careers_institutes','InstituteController@edit_careers_institutes')->name('edit_careers_institutes')->middleware('permission:edit_careers_institutes');
+    Route::post('update_careers_institutes/{id}','InstituteController@update_careers_institutes')->name('update_careers_institutes')->middleware('permission:update_careers_institutes');
 
     Route::resource('/usuarios', 'UserController');
     //rutas para la seccion de estudiantes
@@ -24,4 +138,21 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/cargar_carrera_uni','StudentController@cargar_carre_unir');
     //Rutas para notas
     Route::get('/Conguracion/Agregar', 'ConguracionController@Agregar');
+
+    //Rutas para cargar universidades en registro Faultades
+    Route::post('/charge_university', 'UniversityController@charge_universities');
+
+    Route::post('/charge_faculties', 'UniversityController@charge_faculties');
+
+    Route::get('/estudiantes.register', 'StudentController@register');
+    
+    // para cargar universidad en el formulario de estudiantes
+    
+    Route::post('/load_uni', 'StudentController@load_uni');
+    Route::post('/load_insti', 'StudentController@load_insti');
+    Route::post('/load_faculty_careers', 'StudentController@load_faculty_careers');
+    Route::post('/charge_career_insti', 'InstituteController@charge_career_insti');
+    Route::post('/charge_career_institutes', 'InstituteController@charge_career_institutes');
+    
+    
 });

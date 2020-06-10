@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserFormRequest;
 use App\User;
+use App\Roles;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -31,34 +32,44 @@ class UserController extends Controller
     //Mostrar el formulario para crear un nuevo registro
     public function create()
     {
-
-        return view('usuarios.create');
+        $roles = Roles::get();
+        return view('usuarios.create', compact('roles'));
     }
 
     //ALmancena los registros recien creados de create en la BD
     public function store(Request $request)
-    {
+    {   
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:users',       
+            'password' => 'required',  
+        ],[
+            'name.required' => 'El campo Nombre es requerido',
+            'password.required' => 'El campo Contraseña es requerido'
+        ]);
         $usuario = new User();
-
         $usuario->name = request ('name');
         $usuario->email = request ('email');
         $usuario->password = bcrypt(request ('password'));
-
         $usuario->save();
-        return redirect('/usuarios');
-
+        $usuario->roles()->sync($request->get('roles'));
+        return redirect()->route('index_users', $usuario->id)->with('info', 'Rol registrado con  éxito'); 
     }
 
     //Mostramos un registro especifico
-    public function show($id)
-    {
-        return view('usuarios.show', ['user' => User::findOrFail($id)]);
+    public function show(Request $request)
+    {   
+        $role_user = User::roles_user($request->id);
+        $user = User::findOrFail($request->id);
+        return view('usuarios.show', compact('user','role_user'));
     }
 
     //Muestra el formulario con los datos a editar de un registro en especifico
-    public function edit($id)
+    public function edit(Request $request)
     {
-        return view('usuarios.edit', ['user' => User::findOrFail($id)]);
+        $roles = Roles::orderBy('id')->get();
+        $user = User::find($request->id);
+        return view('usuarios.edit',compact('roles','user'));
     }
 
     //Actualizar un registro en la BD
@@ -66,20 +77,18 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $usuario =  User::findOrFail($id);
-
         $usuario->name = $request->get('name');
         $usuario->email = $request->get('email');
-
-
         $usuario->update();
-        return redirect('/usuarios');
+        $usuario->roles()->sync($request->get('roles'));
+        return redirect()->route('index_users', $usuario->id)->with('info', 'Rol registrado con  éxito');
     }
 
     //Elimina un registro especifico de la BD
-    public function destroy($id)
+    public function delete(Request $request)
     {
-        $usuario =  User::findOrFail($id);
+        $usuario =  User::findOrFail($request->id);
         $usuario->delete();
-        return redirect('/usuarios');
+        return redirect()->route('index_users', $usuario->id)->with('info', 'Rol registrado con  éxito');
     }
 }

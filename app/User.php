@@ -39,4 +39,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    protected static function roles_user($role_user){        
+        return $user_roles = \DB::table('role_user')
+            ->join('roles','role_user.role_id','=','roles.id')
+                    ->where('role_user.user_id','=',$role_user)
+                    ->orderByRaw('roles.id ASC')
+            ->get();
+    }
 }

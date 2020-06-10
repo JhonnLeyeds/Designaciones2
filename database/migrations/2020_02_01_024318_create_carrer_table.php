@@ -13,13 +13,17 @@ class CreateCarrerTable extends Migration
      */
     public function up()
     {
-        Schema::create('carrer', function (Blueprint $table) {
+        Schema::create('career', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->unsignedBigInteger('univ_id');
+            $table->string('name_career');
+            $table->text('description');
+            $table->unsignedBigInteger('faculty_id');
             // $table->unsignedBigInteger('insti_id');
-            $table->foreign('univ_id')->references('id')->on('univeridads');
+            $table->foreign('faculty_id')->references('id')->on('faculties');
             // $table->foreign('insti_id')->references('id')->on('institutos');
+            
+            $table->unsignedBigInteger('user_create');
+            $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
         });
     }
@@ -31,6 +35,6 @@ class CreateCarrerTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('carrer');
+        Schema::dropIfExists('career');
     }
 }

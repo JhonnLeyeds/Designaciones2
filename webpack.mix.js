@@ -11,5 +11,36 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-   .sass('resources/sass/app.scss', 'public/css');
+
+mix
+.styles([
+   'resources/vendor/rugal/css/bootstrap.min.css',   
+   'resources/vendor/toastr/toastr.min.css',
+   'resources/vendor/rugal/css/ruang-admin.min.css',
+   'resources/vendor/select2/css/select2.min.css',
+   'resources/vendor/select2/css/select2-bootstrap4.min.css',
+   'resources/vendor/@fortawesome/fontawesome-free/css/all.min.css',   
+   'resources/vendor/dataTables/css/dataTables.bootstrap.css',
+],'public/css/app.css')
+
+.js('resources/js/app.js', 'public/js')
+
+.scripts([
+   'resources/vendor/rugal/js/jquery.min.js',
+   'resources/vendor/rugal/js/bootstrap.bundle.min.js',
+   'resources/vendor/rugal/js/ruang-admin.min.js',
+   'resources/vendor/toastr/toastr.min.js',
+   'resources/vendor/select2/js/select2.full.min.js',
+   'resources/vendor/select2/js/select2.js',   
+   'resources/vendor/dataTables/js/dataTables.bootstrap.min.js',
+   'resources/vendor/dataTables/js/dataTables.bootstrap4.min.js',
+   
+   //'resources/vendor/nucleo/js/jquery-scrollLock.min.js',
+],'public/js/vendor.js')
+
+.copy('resources/vendor/@fortawesome/fontawesome-free/webfonts', 'public/webfonts')
+
+
+.copy('resources/vendor/nucleo/css/icons', 'public/fonts')
+
+.version()

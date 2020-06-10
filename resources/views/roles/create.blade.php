@@ -1,5 +1,9 @@
-<div class="container" >
-    <form action="store_roles" method="POST" class="save_date">    
+@component('components.create_card')
+    @slot('title')
+		Registro Nuevos Roles
+    @endslot    
+	@slot('bodycard')
+	<form action="store_roles" method="POST" class="save_date">    
         <div class="row">
             <div class="col-sm-5">
                 @csrf
@@ -38,7 +42,7 @@
                 <div class="input-group mr">
                     <ul class="list-unstyled">
                     <?php $a = 0?>
-                    @foreach( $permissions as $permission)            
+                    @forelse( $permissions as $permission)            
                         <li>   
                             <label class="checkbosx">
                                 {{ Form::checkbox('permissions[]', $permission->id, null,['class' => 'checked_role']) }}
@@ -46,10 +50,27 @@
                                 {{ $permission->name}}
                             </label for="{{$permission->id}}"> <em>({{ $permission->description ?: 'Sin descripcion' }})</em>
                         </li>
-                    @endforeach
+                    @empty
+                        <div class="text-red">
+                            <i class="fas fa-exclamation"></i> No hay permisos Registrados
+                        </div>
+                    @endforelse
                     </ul>
                 </div>  
             </div>        
         </div>
     </form>
-</div>
+	@endslot
+	@slot('action')
+		@can('index_roles')
+			<button href="{{ route('index_roles') }}" class="btn btn-sm btn-outline-success button_back float-right"> <i class="fas fa-arrow-left"></i> Atras </button>
+		@endcan
+	@endslot
+@endcomponent
+<script>
+$(function () {
+  $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+})
+</script>

@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Caso;
 use App\Departamento;
 use App\Student;
+use App\Province;
 use App\Univeridad;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Console\Presets\React;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -23,67 +25,340 @@ class StudentController extends Controller
 
     // }
 
+    public function register(){
+        $departments = Departamento::all();
+        $casos = Caso::all();
+        return view('students.create1', compact('departments', 'casos'));
+    }
     public function index()
     {
         $students = Student::all();
-        return view('estudiantes.index' ,  ['students' => $students ]);
+        return view('students.index' ,  ['students' => $students ]);
     }
 
     public function create()
     {
-
-        //CON ESO LLAMO MIS DATOS DESDE LA BD
-         $departamentos = Departamento::all();
+         $departments = Departamento::all();
          $casos = Caso::all();
-         return view('estudiantes.create', compact('departamentos', 'casos'));
+         return view('students.create', compact('departments', 'casos'));
 
 
     }
 
 
-    public function store(Request $request)
+    public function store_students(Request $request)
     {
-            $student = new Student();
-            $student->nombre = request('nombre');
-            $student->ap_pat = request('ap_pat');
-            $student->ap_mat = request('ap_mat');
-            $student->ci = request('ci');
-            $student->exp = request('exp');
-            $student->date = request('date');
-            $student->celular = request('celular');
-            $student->correo = request('correo');
-            $student->sexo = request('sexo');
-            $student->depart_id = request('depart_id');
-            $student->univ_id = request('univ_id');
-            $student->insti_id = request('insti_id');
-            $student->carrer_id = request('carrer_id');
-            $student->caso_id = request('caso_id');
+        $status = 'success';
+        $conent = 'El Estudiante'. $request->name .' fue Registrado Correctamente';
+        $request->validate([
+            'type_uni_inst' => 'required',
+        ],[
+            'type_uni_inst.required' => 'Usted debe seleccionar una Institucion Educativa',
+        ]);
+        if($request->type_uni_inst === 'universidad'){
+            $request->validate([
+                'a_paterno' => 'required|alpha',
+                'a_materno' => 'required|alpha',
+                'name_student' => 'required|alpha',
+                'addrees' => 'required',
+                'birth_date' => 'required',
+                'ci' => 'required|unique:student',
+                'email' => 'required',
+                //'exp' => 'required',
+                //'genero' => 'required',
+                'phone' => 'numeric',
+                //validate para el formulario de institucion educativa
+                'id_department' => 'numeric',
+                'id_province' => 'numeric',
+                'id_municipality' => 'numeric',
+                'id_university' => 'numeric',
+                'id_faculty' => 'numeric',
+                'id_career' => 'numeric',
+            ],[
+                'ci.unique' => 'El numero de carnet ya esta siendo Utilizado',
+                'a_paterno.alpha' => 'El Apellido Paterno debe contener solo Letras',
+                'a_paterno.required' => 'El Apellido Paterno es Obligatorio',
+                'a_materno.alpha' => 'El Apellido Materno debe contener solo Letras',
+                'a_materno.required' => 'El Apellido Materno es Obligatorio',
+                'name_student.alpha' => 'El Nombre Estudiante debe contener solo Letras',
+                'name_student.required' => 'El Nombre Estudiante es Obligatorio',
+                'addrees.required' => 'Debe llenar la direccion del Estudiante',
+                'birth_date.required' => 'Debe llenar este Campo',
+                'ci.required' => 'El Numero de Carnet es Obligatorio',
+                'email.required' => 'El Correo Electronico es Obligatorio',                
+                'phone.numeric' => 'El Telefono debe ser Numerico',
 
-            $student->save();
-            return redirect('/estudiantes');
+                'id_department.numeric' => 'Seleccione un Departamento',  
+                'id_province.numeric' => 'Seleccione una Provincia',    
+                'id_municipality.numeric' => 'Seleccione un Municipio',
+                'id_faculty.numeric' => 'Seleccione una Facultad',
+                'id_university.numeric' => 'Seleccione una Universidad',
+                'id_career.numeric' => 'Seleccione una Carrera',
+                      
+            ]);
+                $new_student = new Student();
+                $new_student->name = request ('name_student');
+                $new_student->ap_pat = request ('a_paterno');
+                $new_student->ap_mat = request ('a_materno');
+                $new_student->ci = request ('ci');
+                $new_student->exp = request ('exp');
+                $new_student->birth_date = request ('birth_date');
+                $new_student->celular = request ('phone');
+                $new_student->correo = request ('email');
+                $new_student->direccion = request ('addrees');
+                $new_student->sexo = request ('genero');
+                $new_student->insti_id = 1;
+                $new_student->carrer_id = request ('id_career');
+                $new_student->caso_esp = 1;
+                $new_student->user_create = \Auth::user()->id;
+                $new_student->save();
+        }else{
+            $request->validate([
+                'a_paterno' => 'required|alpha',
+                'a_materno' => 'required|alpha',
+                'name_student' => 'required|alpha',
+                'addrees' => 'required',
+                'birth_date' => 'required',
+                'ci' => 'required|unique:student',
+                'email' => 'required',
+                'exp' => 'required',
+                'genero' => 'required',
+                'phone' => 'numeric',
+                'id_department' => 'numeric',
+                'id_province' => 'numeric',
+                'id_municipality' => 'numeric',
+                'id_institute' => 'numeric',
+                'id_career' => 'numeric'    
+            ],[
+                //validacion para el formulario de institucion educativa
+                'ci.unique' => 'El numero de carnet ya esta siendo Utilizado',
+                'a_paterno.alpha' => 'El Apellido Paterno debe contener solo Letras',
+                'a_paterno.required' => 'El Apellido Paterno es Obligatorio',
+                'a_materno.alpha' => 'El Apellido Materno debe contener solo Letras',
+                'a_materno.required' => 'El Apellido Materno es Obligatorio',
+                'name_student.alpha' => 'El Nombre Estudiante debe contener solo Letras',
+                'name_student.required' => 'El Nombre Estudiante es Obligatorio',
+                'addrees.required' => 'Debe llenar la direccion del Estudiante',
+                'birth_date.required' => 'Debe llenar este Campo',
+                'ci.required' => 'El Numero de Carnet es Obligatorio',
+                'email.required' => 'El Correo Electronico es Obligatorio',                
+                'phone.numeric' => 'El Telefono debe ser Numerico',
+
+                'id_department.numeric' => 'Seleccione un Departamento',  
+                'id_province.numeric' => 'Seleccione una Provincia',    
+                'id_municipality.numeric' => 'Seleccione un Municipio',
+                'id_institute.numeric' => 'Seleccione un Instituto',
+                'id_career.numeric' => 'Seleccione una Carrera',
+            ]);
+                $new_student = new Student();
+                $new_student->name = request ('name_student');
+                $new_student->ap_pat = request ('a_paterno');
+                $new_student->ap_mat = request ('a_materno');
+                $new_student->ci = request ('ci');
+                $new_student->exp = request ('exp');
+                $new_student->birth_date = request ('birth_date');
+                $new_student->celular = request ('phone');
+                $new_student->correo = request ('email');
+                $new_student->sexo = request ('genero');
+                $new_student->direccion = request ('addrees');
+                $new_student->insti_id = request ('id_career');
+                $new_student->carrer_id = 1;
+                $new_student->caso_esp = 1;
+                $new_student->user_create = \Auth::user()->id;
+                $new_student->save();
+        }
+		return redirect()->route('index_students')
+            ->with('info', [
+                'status' => $status,
+                'content' => $conent
+            ]);
 
     }
 
-    public function edit($id)
-    {
-        //
+    public function edit_students(Request $request)
+    {        
+        $student = (Student::edit_student($request->id));
+        $departments = Departamento::all();          
+        if($student->carrer_id === 1){
+            $uni = Student::edit_student_inst($request->id);
+            $prov = Student::find_province($uni->id_depart);
+            $municipalities = Student::find_municipalities($uni->id_province);
+            $institutes = Student::find_institutes($uni->id_municipality);
+            $careers_insitutes = Student::find_careers_insitutes($uni->id_institute);
+            //return \Response::json($uni);
+            return view('students.edit',compact('student','uni','departments','prov','municipalities','institutes','careers_insitutes'));
+            
+            
+        }elseif($student->insti_id === 1){
+            //para universidades
+            $uni = Student::edit_student_uni($request->id);
+            $prov = Student::find_province($uni->id_depart);
+            $municipalities = Student::find_municipalities($uni->id_province);
+            $universities = Student::find_universities($uni->id_municipality);
+            $faculties = Student::find_faculties($uni->id_universidad);
+            $faculties_careers = Student::find_faculties_careers($uni->id_faculty);
+            //return \Response::json($uni);
+            return view('students.edit',compact('student','uni','departments','prov','municipalities','universities','faculties','faculties_careers'));
+            
+        }
+        
     }
 
-    public function show($id)
+    public function show_students(Request $request)
     {
-        //
+        $student = (Student::show_student($request->id));        
+        return view('students.show',compact('student'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update_students(Request $request, $id)
     {
-        //
+        $status = 'success';
+        $conent = 'El Estudiante'. $request->name .' fue Registrado Correctamente';
+        $request->validate([
+            'type_uni_inst' => 'required',
+        ],[
+            'type_uni_inst.required' => 'Usted debe seleccionar una Institucion Educativa',
+        ]);
+        if($request->type_uni_inst === 'universidad'){
+            $request->validate([
+                'a_paterno' => 'required|alpha',
+                'a_materno' => 'required|alpha',
+                'name_student' => 'required|alpha',
+                'addrees' => 'required',
+                'birth_date' => 'required',
+                'ci' => 'required|unique:student,ci,'.$id,
+                'email' => 'required',
+                //'exp' => 'required',
+                //'genero' => 'required',
+                'phone' => 'numeric',
+                //validate para el formulario de institucion educativa
+                'id_department' => 'numeric',
+                'id_province' => 'numeric',
+                'id_municipality' => 'numeric',
+                'id_university' => 'numeric',
+                'id_faculty' => 'numeric',
+                'id_career' => 'numeric',
+            ],[
+                'ci.unique' => 'El numero de carnet ya esta siendo Utilizado',
+                'a_paterno.alpha' => 'El Apellido Paterno debe contener solo Letras',
+                'a_paterno.required' => 'El Apellido Paterno es Obligatorio',
+                'a_materno.alpha' => 'El Apellido Materno debe contener solo Letras',
+                'a_materno.required' => 'El Apellido Materno es Obligatorio',
+                'name_student.alpha' => 'El Nombre Estudiante debe contener solo Letras',
+                'name_student.required' => 'El Nombre Estudiante es Obligatorio',
+                'addrees.required' => 'Debe llenar la direccion del Estudiante',
+                'birth_date.required' => 'Debe llenar este Campo',
+                'ci.required' => 'El Numero de Carnet es Obligatorio',
+                'email.required' => 'El Correo Electronico es Obligatorio',                
+                'phone.numeric' => 'El Telefono debe ser Numerico',
+
+                'id_department.numeric' => 'Seleccione un Departamento',  
+                'id_province.numeric' => 'Seleccione una Provincia',    
+                'id_municipality.numeric' => 'Seleccione un Municipio',
+                'id_faculty.numeric' => 'Seleccione una Facultad',
+                'id_university.numeric' => 'Seleccione una Universidad',
+                'id_career.numeric' => 'Seleccione una Carrera',
+                      
+            ]);
+                $save_student = Student::find($id);
+                $save_student->name = $request->name_student;
+                $save_student->ap_pat = $request->a_paterno;
+                $save_student->ap_mat = $request->a_materno;
+                $save_student->ci = $request->ci;
+                $save_student->exp = $request->exp;
+                $save_student->birth_date = $request->birth_date;
+                $save_student->celular = $request->phone;
+                $save_student->correo = $request->email;
+                $save_student->sexo = $request->genero;
+                $save_student->direccion = $request->addrees;
+                $save_student->carrer_id = $request->id_career;
+                //$save_student->caso_esp = $request->caso_esp;
+                $save_student->save();
+                return redirect()->route('index_students')
+                    ->with('info', [
+                        'status' => $status,
+                        'content' => $conent
+                    ]);
+        }else{
+            $request->validate([
+                'a_paterno' => 'required|alpha',
+                'a_materno' => 'required|alpha',
+                'name_student' => 'required|alpha',
+                'addrees' => 'required',
+                'birth_date' => 'required',
+                'ci' => 'required|unique:student,ci,'.$id,
+                'email' => 'required',
+                'exp' => 'required',
+                'genero' => 'required',
+                'phone' => 'numeric',
+                'id_department' => 'numeric',
+                'id_province' => 'numeric',
+                'id_municipality' => 'numeric',
+                'id_institute' => 'numeric',
+                'id_career' => 'numeric'    
+            ],[
+                //validacion para el formulario de institucion educativa
+                'ci.unique' => 'El numero de carnet ya esta siendo Utilizado',
+                'a_paterno.alpha' => 'El Apellido Paterno debe contener solo Letras',
+                'a_paterno.required' => 'El Apellido Paterno es Obligatorio',
+                'a_materno.alpha' => 'El Apellido Materno debe contener solo Letras',
+                'a_materno.required' => 'El Apellido Materno es Obligatorio',
+                'name_student.alpha' => 'El Nombre Estudiante debe contener solo Letras',
+                'name_student.required' => 'El Nombre Estudiante es Obligatorio',
+                'addrees.required' => 'Debe llenar la direccion del Estudiante',
+                'birth_date.required' => 'Debe llenar este Campo',
+                'ci.required' => 'El Numero de Carnet es Obligatorio',
+                'email.required' => 'El Correo Electronico es Obligatorio',                
+                'phone.numeric' => 'El Telefono debe ser Numerico',
+
+                'id_department.numeric' => 'Seleccione un Departamento',  
+                'id_province.numeric' => 'Seleccione una Provincia',    
+                'id_municipality.numeric' => 'Seleccione un Municipio',
+                'id_institute.numeric' => 'Seleccione un Instituto',
+                'id_career.numeric' => 'Seleccione una Carrera',
+            ]);
+            $save_student = Student::find($id);
+            $save_student->name = $request->name_student;
+            $save_student->ap_pat = $request->a_paterno;
+            $save_student->ap_mat = $request->a_materno;
+            $save_student->ci = $request->ci;
+            $save_student->exp = $request->exp;
+            $save_student->birth_date = $request->birth_date;
+            $save_student->celular = $request->phone;
+            $save_student->correo = $request->email;
+            $save_student->sexo = $request->genero;
+            $save_student->direccion = $request->addrees;
+            $save_student->insti_id = $request->id_career;
+            //$save_student->caso_esp = $request->caso_esp;
+            $save_student->save();
+            return redirect()->route('index_students')
+                ->with('info', [
+                    'status' => $status,
+                    'content' => $conent
+                ]);
+
+        }
     }
 
 
-    public function destroy($id)
-    {
-        //
+    public function delete_students(Request $request)
+    {   
+        $name = Student::find($request->id);
+        $status = 'success';
+        $conent = 'El Estudiante '. $name->name_career .' fue Aliminado Correctamente';    
+        try {
+            $institute = Student::find($request->id)->delete();
+        } catch (\Throwable $th) {
+            $status = 'error';
+            $conent = 'El Estudiante '. $request->name_career .' no fue Eliminado';   
+        }
+        
+        return redirect()->route('index_students')
+        ->with('info', [
+            'status' => $status,
+            'content' => $conent
+        ]);
     }
     public function cargar_uni(Request $request){
         $depa = "SELECT * FROM univeridads WHERE depart_id = :id";
@@ -105,5 +380,17 @@ class StudentController extends Controller
         $carr = \DB::select(\DB::raw($uni),array('id'=>$request->id));
         return $carr;
     }
-
+    public function load_uni(Request $request){
+        $departments = Departamento::get();
+        return view('students.components.universities',compact('departments'));
+    }
+    public function load_faculty_careers(Request $request){
+        return \DB::table('career')
+        ->where('career.faculty_id','=',$request->id)
+        ->get();
+    }
+    public function load_insti(Request $request){
+        $departments = Departamento::get();
+        return view('students.components.institute',compact('departments'));
+    }
 }

@@ -13,11 +13,13 @@ class CreateInstitutosTable extends Migration
      */
     public function up()
     {
-        Schema::create('institutos', function (Blueprint $table) {
+        Schema::create('institutes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-            $table->unsignedBigInteger('depart_id');
-            $table->foreign('depart_id')->references('id')->on('departamentos');
+            $table->string('name_institute');
+            $table->unsignedBigInteger('municipality_id');
+            $table->foreign('municipality_id')->references('id')->on('municipalities');
+            $table->unsignedBigInteger('user_create');
+            $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
         });
     }

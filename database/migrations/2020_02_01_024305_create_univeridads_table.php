@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateUniveridadsTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migratiosns.
      *
      * @return void
      */
@@ -15,9 +15,11 @@ class CreateUniveridadsTable extends Migration
     {
         Schema::create('univeridads', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nombre');
-             $table->unsignedBigInteger('depart_id');
-            $table->foreign('depart_id')->references('id')->on('departamentos');
+            $table->string('name_university');
+            $table->unsignedBigInteger('municipality_id');
+            $table->foreign('municipality_id')->references('id')->on('municipalities');
+            $table->unsignedBigInteger('user_create');
+            $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
         });
     }

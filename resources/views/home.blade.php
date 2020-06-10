@@ -1,143 +1,346 @@
-@extends('layouts.app')
+@extends('layouts.app4')
 @section('content')
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div id="app">
-        <div class="wrapper">
-            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
-                    </li>
-                </ul>
-                <form class="form-inline ml-3">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" name="search" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link" data-toggle="dropdown" href="#">
-                            <i class="fas fa-sign-out-alt"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            @guest
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
-                            @else
-                                <a class="dropdown-item dropdown-footer btn btn-block btn-outline-danger btn-sm" href="{{ route('logout') }}" 
-                                onclick="event.preventDefault();
-                                document.getElementById('logout-form').submit();">
-                                Cerrar Sesión
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            @endguest                   
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-            <aside class="main-sidebar sidebar-dark-primary elevation-4">
-                <a href="{{ url('/') }}" class="brand-link">
-                    <img src="{{asset('dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-                        style="opacity: .8">
-                    <span class="brand-text font-weight-light">DESIGNACIONES</span>
-                </a>
-                <div class="sidebar">
-                    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                        <div class="image">
-                            <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">                            
-                        </div>                        
-                        <div class="info">
-                            <a href="#" class="d-block">{{ Auth::user()->name }}</a>
-                        </div>
-                    </div>
-                    <nav class="mt-2">
-                        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-                            data-accordion="false">
-                            <li class="nav-item">
-                                <a href="/" class="{{ Request::path() === '/' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="nav-icon fas fa-home"></i>
-                                    <p>Inicio</p>
-                                </a>
-                            </li>
-                        <li class="nav-item">
-                            <a href="{{url('estudiantes')}}"
-                                class="{{ Request::path() === 'estudiantes' ? 'nav-link active' : 'nav-link' }} load_url">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Estudiantes
-                                </p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{url('ejemplo')}}"
-                                class="{{ Request::path() === 'ejemplo' ? 'nav-link active' : 'nav-link' }}">
-                                <i class="nav-icon fas fa-users"></i>
-                                <p>Designacion</p>
-                            </a>
-                        </li>
-                            <li class="nav-item">
-                                <a href="{{url('usuarios')}}"
-                                    class="{{ Request::path() === 'usuarios' ? 'nav-link active' : 'nav-link' }}">
-                                    <i class="nav-icon fas fa-users"></i>
-                                    <p>
-                                        Usuarios
-                                        <?php use App\User; $users_count = User::all()->count(); ?>
-                                        <span class="right badge badge-danger">{{ $users_count ?? '0' }}</span>
-                                    </p>
-                                </a>
-                            </li>
-                            @can('index_roles')
-                            <li class="nav-item has-treeview">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon far fa-sticky-note"></i>
-                                    <p>Administrar Roles<i class="fas fa-angle-left right"></i></p>
-                                </a>
-                                <ul class="nav nav-treeview">
-                                    <li class="nav-item">
-                                        <a href="{{ route('index_roles') }}"
-                                            class="{{ Request::path() === 'notas/todas' ? 'nav-link active' : 'nav-link'}} load_url">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Roles</p>
-                                        </a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a href="notas/favoritas"
-                                            class="{{ Request::path() === 'notas/favoritas' ? 'nav-link active' : 'nav-link' }}">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>Asignar Roles</p>
-                                        </a>
-                                    </li>                                    
-                                </ul>
-                            </li>
-                            @endcan
-                        </ul>
-                    </nav>
-                </div>
-            </aside>
-            <div class="content-wrapper">
-                <div class="content-header">
-
-                </div>
-                <section class="content" id="global_content">
-                    @yield('content')
-                </section>
-            </div>
-            <footer class="main-footer">
-                <strong>SEDES 2020
-                    <div class="float-right d-none d-sm-inline-block">
-                        <b>Version</b> 1.0
-                    </div>
-            </footer>
-            <aside class="control-sidebar control-sidebar-dark">
-                <!-- Control sidebar content goes here -->
-            </aside>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <div class="sidebar-brand-icon">
+          <img src="img/logo/logo2.png">
         </div>
+        <div class="sidebar-brand-text mx-3">Designaciones</div>
+      </a>
+      <hr class="sidebar-divider my-0">
+      <li class="nav-item">
+        <a class="nav-link" href="index.html">
+          <i class="fas fa-fw fa-tachometer-alt"></i>
+          <span>Panel de Control</span></a>
+      </li>
+	  <hr class="sidebar-divider">
+	  @can('index_configurations')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBootstrap"
+          aria-expanded="true" aria-controls="collapseBootstrap">
+          <i class="far fa-fw fa-window-maximize"></i>
+          <span>Configuracion</span>
+        </a>
+        <div id="collapseBootstrap" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_departments') }}">Departamentos</a>
+            <a class="collapse-item load_url" href="{{ route('index_provinces') }}">Privincias</a>
+            <a class="collapse-item load_url" href="{{ route('index_municipalities') }}">Municipios</a>
+            <a class="collapse-item load_url" href="{{ route('index_communities') }}">Comunidades</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan
+	  @can('index_medicalCenter')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
+          aria-controls="collapseTable">
+          <i class="fas fa-fw fa-table"></i>
+          <span>G. Centros Medicos</span>
+        </a>
+        <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_medicalCenter') }}">Centros Medicos</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan
+	  @can('index_universities')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUni" aria-expanded="true"
+          aria-controls="collapseUni">
+          <i class="fas fa-fw fa-table"></i>
+          <span>G. Universidades</span>
+        </a>
+        <div id="collapseUni" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+			<a class="collapse-item load_url" href="{{ route('index_universities') }}">Universidades</a>
+			<a class="collapse-item load_url" href="{{ route('index_faculties') }}">Facultades</a>
+			<a class="collapse-item load_url" href="{{ route('index_careers') }}">Carreras</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan
+	  @can('index_institutes')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseInst" aria-expanded="true"
+          aria-controls="collapseInst">
+          <i class="fas fa-fw fa-table"></i>
+          <span>G. Institutos</span>
+        </a>
+        <div id="collapseInst" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+			<a class="collapse-item load_url" href="{{ route('index_institutes') }}">Institutos</a>
+			<a class="collapse-item load_url" href="{{ route('index_careers_institutes') }}">Carreras</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan
+	  @can('index_students')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage" aria-expanded="true"
+          aria-controls="collapsePage">
+          <i class="fas fa-fw fa-columns"></i>
+          <span>Gestión Estudiantes</span>
+        </a>
+        <div id="collapsePage" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_students') }}">Estudiantes</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan
+	  @can('index_users')
+	  <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage_user" aria-expanded="true"
+          aria-controls="collapsePage_user">
+          <i class="fas fa-fw fa-columns"></i>
+          <span>Gestión Usuarios</span>
+        </a>
+        <div id="collapsePage_user" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_users') }}">Usuarios</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan
+	  @can('index_roles')
+	  <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage_roles" aria-expanded="true"
+          aria-controls="collapsePage_roles">
+          <i class="fas fa-fw fa-columns"></i>
+          <span>Gestión Roles</span>
+        </a>
+        <div id="collapsePage_roles" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_roles') }}">Roles</a>
+          </div>
+        </div>
+	  </li>
+	  @endcan      
+      <div class="version" id="version-ruangadmin"></div>
+    </ul>
+    <!-- Sidebar -->
+    <div id="content-wrapper" class="d-flex flex-column">
+      <div id="content">
+        <!-- TopBar -->
+        <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
+          <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
+            <i class="fa fa-bars"></i>
+          </button>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-search fa-fw"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                aria-labelledby="searchDropdown">
+                <form class="navbar-search">
+                  <div class="input-group">
+                    <input type="text" class="form-control bg-light border-1 small" placeholder="What do you want to look for?"
+                      aria-label="Search" aria-describedby="basic-addon2" style="border-color: #3f51b5;">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">
+                        <i class="fas fa-search fa-sm"></i>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-bell fa-fw"></i>
+                <span class="badge badge-danger badge-counter">3+</span>
+              </a>
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="alertsDropdown">
+                <h6 class="dropdown-header">
+                  Alerts Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-primary">
+                      <i class="fas fa-file-alt text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 12, 2019</div>
+                    <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-success">
+                      <i class="fas fa-donate text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 7, 2019</div>
+                    $290.29 has been deposited into your account!
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="mr-3">
+                    <div class="icon-circle bg-warning">
+                      <i class="fas fa-exclamation-triangle text-white"></i>
+                    </div>
+                  </div>
+                  <div>
+                    <div class="small text-gray-500">December 2, 2019</div>
+                    Spending Alert: We've noticed unusually high spending for your account.
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-envelope fa-fw"></i>
+                <span class="badge badge-warning badge-counter">2</span>
+              </a>
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Message Center
+                </h6>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="img/man.png" style="max-width: 60px" alt="">
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div class="font-weight-bold">
+                    <div class="text-truncate">Hi there! I am wondering if you can help me with a problem I've been
+                      having.</div>
+                    <div class="small text-gray-500">Udin Cilok · 58m</div>
+                  </div>
+                </a>
+                <a class="dropdown-item d-flex align-items-center" href="#">
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="img/girl.png" style="max-width: 60px" alt="">
+                    <div class="status-indicator bg-default"></div>
+                  </div>
+                  <div>
+                    <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me that people
+                      say this to all dogs, even if they aren't good...</div>
+                    <div class="small text-gray-500">Jaenab · 2w</div>
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-tasks fa-fw"></i>
+                <span class="badge badge-success badge-counter">3</span>
+              </a>
+              <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                aria-labelledby="messagesDropdown">
+                <h6 class="dropdown-header">
+                  Task
+                </h6>
+                <a class="dropdown-item align-items-center" href="#">
+                  <div class="mb-3">
+                    <div class="small text-gray-500">Design Button
+                      <div class="small float-right"><b>50%</b></div>
+                    </div>
+                    <div class="progress" style="height: 12px;">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="50"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </a>
+                <a class="dropdown-item align-items-center" href="#">
+                  <div class="mb-3">
+                    <div class="small text-gray-500">Make Beautiful Transitions
+                      <div class="small float-right"><b>30%</b></div>
+                    </div>
+                    <div class="progress" style="height: 12px;">
+                      <div class="progress-bar bg-warning" role="progressbar" style="width: 30%" aria-valuenow="30"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </a>
+                <a class="dropdown-item align-items-center" href="#">
+                  <div class="mb-3">
+                    <div class="small text-gray-500">Create Pie Chart
+                      <div class="small float-right"><b>75%</b></div>
+                    </div>
+                    <div class="progress" style="height: 12px;">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: 75%" aria-valuenow="75"
+                        aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                  </div>
+                </a>
+                <a class="dropdown-item text-center small text-gray-500" href="#">View All Taks</a>
+              </div>
+            </li>
+            <div class="topbar-divider d-none d-sm-block"></div>
+            <li class="nav-item dropdown no-arrow">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <img class="img-profile rounded-circle" src="img/boy.png" style="max-width: 60px">
+                <span class="ml-2 d-none d-lg-inline text-white small">Maman Ketoprak</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Profile
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Settings
+                </a>
+                <a class="dropdown-item" href="#">
+                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                  Activity Log
+                </a>
+                <div class="dropdown-divider"></div>
+                @guest
+                    <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar Sesión') }}</a>
+                @else
+                    <a class="dropdown-item" href="{{ route('logout') }}" 
+                    onclick="event.preventDefault();
+					document.getElementById('logout-form').submit();">
+					<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Cerrar Sesión
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                @endguest    
+                
+              </div>
+            </li>
+          </ul>
+        </nav>
+        <!-- Topbar -->
+
+        <!-- Container Fluid-->
+        <div class="container-fluid" id="container-wrapper">
+			<div id="global_content"></div>
+
+
+        </div>
+        <!---Container Fluid-->
+      </div>
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
+              <b><a href="https://indrijunanda.gitlab.io/" target="_blank">indrijunanda</a></b>
+            </span>
+          </div>
+        </div>
+      </footer>
+      <!-- Footer -->
     </div>
-</body>
+  </div>
 @endsection
