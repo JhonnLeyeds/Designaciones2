@@ -9,7 +9,7 @@
 			<div class="form-group">
 				<label for="name">NOMBRE DEPARTAMENTO</label> <br>
 				<small class="text-red" id=""></small>
-				<input type="text" class="form-control name_form" name="nombre" placeholder="Ingrese Nombre del Departamento">
+				<input type="text" class="form-control name_form" name="name_department" placeholder="Ingrese Nombre del Departamento">
 			</div>
 			<div class="form-group">
 				<label for="cod_depa">CODIGO DEPARTAMENTO</label> <br>

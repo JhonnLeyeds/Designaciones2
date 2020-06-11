@@ -20,7 +20,7 @@
                     <tr>
                         <th scope="row">{{ $a++ }}</th>
                         <td>{{ $r->cod_depa }}</td>
-                        <td>{{$r->nombre}}</td>
+                        <td>{{$r->name_department}}</td>
                         <td>{{$r->created_at}}</td>
                         <td>
                             @can('show_departments')<a href="{{ route('show_departments') }}" class="btn btn-success btn-sm show_function" value="{{ $r->id }}" title="Ver Departamento" data-original-title="More Color"> <i class="far fa-eye"></i> </a>@endcan

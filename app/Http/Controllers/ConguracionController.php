@@ -22,16 +22,16 @@ class ConguracionController extends Controller
 	}
 	public function store_departments(Request $request){
 		$request->validate([
-            'nombre' => 'required|unique:departamentos',
+            'name_department' => 'required|unique:departamentos',
             'cod_depa' => 'required|unique:departamentos',       
         ],[
-            'nombre.required' => 'El campo Nombre Departamento es requerido',
-			'nombre.unique' => 'El valor del campo Nombre Departamento ya está en uso',
+            'name_department.required' => 'El campo Nombre Departamento es requerido',
+			'name_department.unique' => 'El valor del campo Nombre Departamento ya está en uso',
 			'cod_depa.required' => 'El campo Codigo Departamento es requerido',
             'cod_depa.unique' => 'El valor del campo Codigo Departamento ya está en uso'
         ]);
 		$department = new Departamento();
-        $department->name_department = request ('nombre');
+        $department->name_department = request ('name_department');
         $department->cod_depa = request ('cod_depa');
         $department->user_create = \Auth::user()->id;
         $department->save();
@@ -48,7 +48,7 @@ class ConguracionController extends Controller
 	}
 	public function update_departments(Request $request, Departamento $departamento){
 		$department =  Departamento::find($departamento->id);
-        $department->nombre = $request->get('nombre');
+        $department->name_department = $request->get('name_department');
 		$department->cod_depa = $request->get('cod_depa');
 		$department->updated_at = date("Y-m-d H:i:s");
 		$department->update();

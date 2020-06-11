@@ -10,7 +10,7 @@
                     <tbody>
                         <tr>
                             <th style="width:50%">Nombre Departamento:</th>
-                            <td>{{ $depa->nombre }}</td>
+                            <td>{{ $depa->name_department }}</td>
                         </tr>
                         <tr>
                             <th>Codigo Departamento:</th>

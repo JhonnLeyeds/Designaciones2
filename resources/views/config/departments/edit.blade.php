@@ -9,7 +9,7 @@
 				<div class="form-group">
 				<label for="name">NOMBRE</label>  
 				<small class="text-red" id=""></small>        
-				<input type="text" class="form-control name_form" name="nombre" value="{{$department_edit[0]->nombre}}" placeholder="Ingrese su Nombre">
+				<input type="text" class="form-control name_form" name="name_department" value="{{$department_edit[0]->name_department}}" placeholder="Ingrese su Nombre">
 				</div>
 				<div class="form-group">
 				<label for="text">CODIGO DEPARTAMENTO</label>
