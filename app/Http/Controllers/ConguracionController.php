@@ -155,6 +155,7 @@ class ConguracionController extends Controller
 		$municipality->cod_muni = request ('cod_muni');
 		$municipality->id_province = $prov->id;
 		$municipality->cod_prov = $prov->cod_prov;
+		$municipality->cod_red = 1;
         $municipality->user_create = \Auth::user()->id;
         $municipality->save();
         return redirect()->route('create_municipalities', $prov->id)
@@ -237,8 +238,7 @@ class ConguracionController extends Controller
 		$community = new Community();
         $community->name_community = request ('name_community');
 		$community->cod_comu = request ('cod_comu');
-		$community->id_muni = $request->id_municipality;
-		$community->cod_red = 1;
+		$community->id_muni = $request->id_municipality;		
 		$community->cod_muni = $mun->cod_muni;
         $community->user_create = \Auth::user()->id;
         $community->save();
