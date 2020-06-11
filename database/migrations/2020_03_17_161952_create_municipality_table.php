@@ -20,7 +20,7 @@ class CreateMunicipalityTable extends Migration
             $table->integer('cod_prov');
             $table->unsignedBigInteger('cod_red');
             $table->unsignedBigInteger('id_province');
-            $table->foreign('id_province')->references('id')->on('province');
+            $table->foreign('id_province')->references('id')->on('provinces');
             $table->unsignedBigInteger('user_create');
             $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
