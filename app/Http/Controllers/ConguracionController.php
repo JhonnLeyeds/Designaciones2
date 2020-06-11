@@ -31,7 +31,7 @@ class ConguracionController extends Controller
             'cod_depa.unique' => 'El valor del campo Codigo Departamento ya está en uso'
         ]);
 		$department = new Departamento();
-        $department->nombre = request ('nombre');
+        $department->name_department = request ('nombre');
         $department->cod_depa = request ('cod_depa');
         $department->user_create = \Auth::user()->id;
         $department->save();
