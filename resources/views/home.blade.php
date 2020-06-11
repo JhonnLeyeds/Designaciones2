@@ -92,7 +92,6 @@
         </div>
 	  </li>
 	  @endcan
-	  @can('index_users')
 	  <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage_user" aria-expanded="true"
           aria-controls="collapsePage_user">
@@ -105,7 +104,6 @@
           </div>
         </div>
 	  </li>
-	  @endcan
 	  <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage_roles" aria-expanded="true"
           aria-controls="collapsePage_roles">
