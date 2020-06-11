@@ -22,8 +22,7 @@ class CreateEstableSaludsTable extends Migration
             $table->integer('atention_nivel');
             $table->foreign('atention_nivel')->references('id')->on('level_atention');
             $table->string('type');
-            $table->unsignedBigInteger('cod_muni');
-            $table->foreign('cod_muni')->references('cod_muni')->on('municipalities');
+            $table->integer('cod_muni');
             $table->unsignedBigInteger('id_muni');
             $table->foreign('id_muni')->references('id_muni')->on('municipalities');
             $table->unsignedBigInteger('user_create');
