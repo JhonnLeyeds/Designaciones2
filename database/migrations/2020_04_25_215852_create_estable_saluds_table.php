@@ -24,7 +24,7 @@ class CreateEstableSaludsTable extends Migration
             $table->string('type');
             $table->integer('cod_muni');
             $table->unsignedBigInteger('id_muni');
-            $table->foreign('id_muni')->references('id_muni')->on('municipalities');
+            $table->foreign('id_muni')->references('id')->on('municipalities');
             $table->unsignedBigInteger('user_create');
             $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
