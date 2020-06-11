@@ -25,10 +25,7 @@
 						<td>
 							@can('show_users')<a href="{{ route('show_users') }}" class="btn btn-success btn-sm show_function" value="{{ $user->id }}" title="Ver Usuario" data-original-title="More Color"> <i class="far fa-eye"></i> </a>@endcan
 							@can('edit_users')<a href="{{ route('edit_users') }}" class="btn btn-primary btn-sm edit_function"  value="{{ $user->id }}" title="Editar Usuario" data-original-title="More Color"> <i class="fas far fa-edit"></i> </a>@endcan
-                            @can('delete_users')<a href="{{ route('delete_users') }}" class="btn btn-danger btn-sm delete_function"  value="{{ $user->id }}" title="Borrar Usuario" data-original-title="More Color"> <i class="fas fa-trash-alt"></i> </a>@endcan
-                            <a href="{{ route('show_users') }}" class="btn btn-success btn-sm show_function" value="{{ $user->id }}" title="Ver Usuario" data-original-title="More Color"> <i class="far fa-eye"></i> </a>
-							<a href="{{ route('edit_users') }}" class="btn btn-primary btn-sm edit_function"  value="{{ $user->id }}" title="Editar Usuario" data-original-title="More Color"> <i class="fas far fa-edit"></i> </a>
-							<a href="{{ route('delete_users') }}" class="btn btn-danger btn-sm delete_function"  value="{{ $user->id }}" title="Borrar Usuario" data-original-title="More Color"> <i class="fas fa-trash-alt"></i> </a>
+							@can('delete_users')<a href="{{ route('delete_users') }}" class="btn btn-danger btn-sm delete_function"  value="{{ $user->id }}" title="Borrar Usuario" data-original-title="More Color"> <i class="fas fa-trash-alt"></i> </a>@endcan
 						</td>
                     </tr>
                     @endforeach

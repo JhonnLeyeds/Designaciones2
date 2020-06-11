@@ -24,9 +24,6 @@
                                 @can('show_roles')<a href="{{ route('show_role') }}" class="btn btn-success btn-sm show_function" value="{{ $r->id }}" title="Ver Rol" data-original-title="More Color"> <i class="far fa-eye"></i> </a>@endcan
                                 @can('edit_roles')<a href="{{ route('edit_role') }}" class="btn btn-primary btn-sm edit_function"  value="{{ $r->id }}" title="Editar Rol" data-original-title="More Color"> <i class="fas far fa-edit"></i> </a>@endcan
                                 @can('delete_roles')<a href="{{ route('delete_role') }}" class="btn btn-danger btn-sm delete_function"  value="{{ $r->id }}" title="Borrar Rol" data-original-title="More Color"> <i class="fas fa-trash-alt"></i> </a>@endcan
-                               <a href="{{ route('show_role') }}" class="btn btn-success btn-sm show_function" value="{{ $r->id }}" title="Ver Rol" data-original-title="More Color"> <i class="far fa-eye"></i> </a>
-                                <a href="{{ route('edit_role') }}" class="btn btn-primary btn-sm edit_function"  value="{{ $r->id }}" title="Editar Rol" data-original-title="More Color"> <i class="fas far fa-edit"></i> </a>
-                                <a href="{{ route('delete_role') }}" class="btn btn-danger btn-sm delete_function"  value="{{ $r->id }}" title="Borrar Rol" data-original-title="More Color"> <i class="fas fa-trash-alt"></i> </a>
                             </td>
                         </tr>
                     @endforeach
@@ -38,7 +35,6 @@
             @can('create_roles')
             <a href="{{ route('create_roles') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Registrar Nuevo Rol</a> 
             @endcan
-            <a href="{{ route('create_roles') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Registrar Nuevo Rol</a> 
         @endslot
 @endcomponent
 <script>
