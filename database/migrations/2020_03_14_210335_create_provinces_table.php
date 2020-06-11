@@ -17,8 +17,7 @@ class CreateProvincesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('cod_prov');
             $table->string('name_province');
-            $table->unsignedBigInteger('cod_depa');
-            $table->foreign('cod_depa')->references('cod_depa')->on('departamentos');
+            $table->integer('cod_depa');
             $table->unsignedBigInteger('id_department');
             $table->foreign('id_department')->references('id')->on('departamentos');
             $table->unsignedBigInteger('user_create');
