@@ -9,37 +9,37 @@ Route::get('/', 'HomeController@index')->name('home');
 //Configuracion para usar el middleware de los roles en las rutas
 Route::middleware(['auth'])->group(function(){
     //Rutas para manejar los roles del sistema
-    /*Route::get('roles','RoleController@index')->name('index_roles')->middleware('permission:index_roles');
+    Route::get('roles','RoleController@index')->name('index_roles')->middleware('permission:index_roles');
     Route::get('create_roles','RoleController@create')->name('create_roles')->middleware('permission:create_roles');
     Route::post('store_roles','RoleController@store')->name('store_roles')->middleware('permission:store_roles');
     Route::post('delete_role','RoleController@delete')->name('delete_role')->middleware('permission:delete_roles');
     Route::post('show_role','RoleController@show')->name('show_role')->middleware('permission:show_roles');
     Route::post('edit_role','RoleController@edit')->name('edit_role')->middleware('permission:edit_roles');
-    Route::post('update_role/{role}','RoleController@update')->name('update_role')->middleware('permission:update_roles');*/
-    Route::get('roles','RoleController@index')->name('index_roles');
+    Route::post('update_role/{role}','RoleController@update')->name('update_role')->middleware('permission:update_roles');
+    /*Route::get('roles','RoleController@index')->name('index_roles');
     Route::get('create_roles','RoleController@create')->name('create_roles');
     Route::post('store_roles','RoleController@store')->name('store_roles');
     Route::post('delete_role','RoleController@delete')->name('delete_role');
     Route::post('show_role','RoleController@show')->name('show_role');
     Route::post('edit_role','RoleController@edit')->name('edit_role');
-    Route::post('update_role/{role}','RoleController@update')->name('update_role');
+    Route::post('update_role/{role}','RoleController@update')->name('update_role');*/
     //Fin Rutas para los roles del sistema
 
     //Rutas para Usuarios
-    /*Route::get('users','UserController@index')->name('index_users')->middleware('permission:index_users');
+    Route::get('users','UserController@index')->name('index_users')->middleware('permission:index_users');
     Route::get('create_users','UserController@create')->name('create_users')->middleware('permission:create_users');
     Route::post('delete_users','UserController@delete')->name('delete_users')->middleware('permission:delete_users');
     Route::post('edit_users','UserController@edit')->name('edit_users')->middleware('permission:edit_users');
     Route::post('show_users','UserController@show')->name('show_users')->middleware('permission:show_users');
     Route::post('store_users','UserController@store')->name('store_users')->middleware('permission:store_users');
-    Route::post('update_user/{user}','UserController@update')->name('update_user')->middleware('permission:update_users');*/
-    Route::get('users','UserController@index')->name('index_users');
+    Route::post('update_user/{user}','UserController@update')->name('update_user')->middleware('permission:update_users');
+    /*Route::get('users','UserController@index')->name('index_users');
     Route::get('create_users','UserController@create')->name('create_users');
     Route::post('delete_users','UserController@delete')->name('delete_users');
     Route::post('edit_users','UserController@edit')->name('edit_users');
     Route::post('show_users','UserController@show')->name('show_users');
     Route::post('store_users','UserController@store')->name('store_users');
-    Route::post('update_user/{user}','UserController@update')->name('update_user');
+    Route::post('update_user/{user}','UserController@update')->name('update_user');*/
 
     //Rutas para Estudiantes
     Route::get('students','StudentController@index')->name('index_students')->middleware('permission:index_students');
