@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Schema;
 class CreateUniveridadsTable extends Migration
 {
     /**
-     * Run the migratiosns.
+     * Run the migratiosns.mier da mierda mierda
      *
      * @return void
      */
