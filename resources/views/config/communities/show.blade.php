@@ -33,7 +33,7 @@
                         </tr>
                         <tr>
                             <th>Pertenece al Departamento:</th>
-                            <td>{{ $d->nombre }}</td>
+                            <td>{{ $d->name_department }}</td>
                         </tr>
                     </tbody>
                 </table>

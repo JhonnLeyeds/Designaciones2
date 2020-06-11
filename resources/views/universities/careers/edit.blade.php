@@ -18,9 +18,9 @@
                                             @forelse($departments as $d)
                                                 @if($career_edit[0]->id_department === $d->id)
                                                 <p>{{ $career_edit[0]->id_department }} {{ $d->id}}</p>             
-                                                <option selected value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                <option selected value="{{ $d->id }}">{{ $d->name_department }}</option>
                                                 @else
-                                                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                <option value="{{ $d->id }}">{{ $d->name_department }}</option>
                                                 @endif
                                             @empty
                                                 <option value="">No hay Departamentos Registrados</option>

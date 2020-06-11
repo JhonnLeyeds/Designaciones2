@@ -12,7 +12,7 @@
             <select name="id_department" id="department_prov" class="form-control select2bs4 select2-danger name_form">
               <option>Seleccione Departamento</option>
               @forelse($departments as $d)
-                <option  value="{{ $d->id }}">{{ $d->nombre }}</option>
+                <option  value="{{ $d->id }}">{{ $d->name_department }}</option>
               @empty
                 <option value="">No hay Departamentos Registrados</option>
               @endforelse

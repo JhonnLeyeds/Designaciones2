@@ -25,7 +25,7 @@
                         </tr>
                         <tr>
                             <th>Pertenece a:</th>
-                            <td>{{ $d->nombre }}</td>
+                            <td>{{ $d->name_department }}</td>
                         </tr>
                     </tbody>
                 </table>

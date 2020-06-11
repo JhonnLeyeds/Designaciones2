@@ -10,7 +10,7 @@
 			<label for="name">SELECCIONE DEPARTAMENTO</label>
 				<select name="department" class="form-control select2bs4 move_option">
 				@forelse($departments as $d)
-					<option  value="{{ $d->id }}">{{ $d->nombre }}</option>
+					<option  value="{{ $d->id }}">{{ $d->name_department }}</option>
 				@empty
 					<option value="">No hay Departamentos Registrados</option>
 				@endforelse

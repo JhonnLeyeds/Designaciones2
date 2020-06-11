@@ -125,9 +125,9 @@
                                                 <option>Seleccione Departamento</option>
                                                 @forelse($departments as $d)
                                                     @if($uni->id_depart === $d->id)          
-                                                        <option selected value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                        <option selected value="{{ $d->id }}">{{ $d->name_department }}</option>
                                                     @else
-                                                        <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                        <option value="{{ $d->id }}">{{ $d->name_department }}</option>
                                                     @endif
                                                 @empty
                                                     <option value="">No hay Departamentos Registrados</option>
@@ -270,9 +270,9 @@
                                         <select name="id_university" id="university" class="charge_faculties change_select delete_u delete_option form-control select2bs4 select2-danger name_form">
                                             @forelse($universities as $d)
                                                 @if($uni->id_universidad === $d->id)            
-                                                <option selected value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                <option selected value="{{ $d->id }}">{{ $d->name_department }}</option>
                                                 @else
-                                                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                <option value="{{ $d->id }}">{{ $d->name_department }}</option>
                                                 @endif
                                             @empty
                                                 <option value="">No hay Municipios Registrados</option>

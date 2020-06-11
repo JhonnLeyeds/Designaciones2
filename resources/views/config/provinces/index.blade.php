@@ -21,7 +21,7 @@
                     <th scope="row">{{$a++}}</th>
                     <td>{{$r->name_province}}</td>
                     <td>{{$r->created_at}}</td>
-                    <td>{{$r->nombre}}</td>
+                    <td>{{$r->name_department}}</td>
                     <td>
                         @can('show_provinces')<a href="{{ route('show_provinces') }}" class="btn btn-success btn-sm show_function" value="{{ $r->id }}" title="Ver Departamento" data-original-title="More Color"> <i class="far fa-eye"></i> </a>@endcan
                         @can('edit_provinces')<a href="{{ route('edit_provinces') }}" class="btn btn-primary btn-sm edit_function"  value="{{ $r->id }}" title="Editar Departamento" data-original-title="More Color"> <i class="fas far fa-edit"></i> </a>@endcan

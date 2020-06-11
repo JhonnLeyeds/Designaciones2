@@ -37,7 +37,7 @@
                         </tr>
                         <tr>
                             <th>Pertenece al Municipio:</th>
-                            <td>{{ $d->nombre }}</td>
+                            <td>{{ $d->name_department }}</td>
                         </tr>
                     </tbody>
                 </table>
