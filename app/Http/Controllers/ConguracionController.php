@@ -238,6 +238,7 @@ class ConguracionController extends Controller
         $community->name_community = request ('name_community');
 		$community->cod_comu = request ('cod_comu');
 		$community->id_muni = $request->id_municipality;
+		$community->cod_red = 1;
 		$community->cod_muni = $mun->cod_muni;
         $community->user_create = \Auth::user()->id;
         $community->save();
