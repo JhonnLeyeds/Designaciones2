@@ -35,7 +35,7 @@ class Instituto extends Model
                 'institutes.updated_at',
                 'municipalities.name_municipality',
                 'provinces.name_province',
-                'departamentos.nombre'
+                'departamentos.name_department'
             ]);
     }
     protected static function find_edit_institute($id){

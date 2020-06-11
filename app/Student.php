@@ -55,7 +55,7 @@ class Student extends Model
                 'univeridads.nombre',
                 'municipalities.name_municipality',
                 'provinces.name_province',
-                'departamentos.nombre AS name_depart',
+                'departamentos.name_department AS name_depart',
             ])->first();
         }else{
             if($test->carrer_id === 1){
@@ -83,7 +83,7 @@ class Student extends Model
                     'institutes.name_institute',
                     'municipalities.name_municipality',
                     'provinces.name_province',
-                    'departamentos.nombre AS name_depart',
+                    'departamentos.name_department AS name_depart',
                 ])->first();
             }
         }

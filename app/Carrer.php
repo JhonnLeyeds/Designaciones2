@@ -52,7 +52,7 @@ class Carrer extends Model
                 'univeridads.nombre',
                 'municipalities.name_municipality',
                 'provinces.name_province',
-                'departamentos.nombre',
+                'departamentos.name_department',
             ]);
     }
     protected static function find_edit_career($id){

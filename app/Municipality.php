@@ -41,7 +41,7 @@ class Municipality extends Model
             'municipalities.created_at',
             'municipalities.updated_at',
             'provinces.name_province',
-            'departamentos.nombre',
+            'departamentos.name_department',
         ]);
     }
 }

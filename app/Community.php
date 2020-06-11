@@ -28,7 +28,7 @@ class Community extends Model
             'communities.created_at',
             'municipalities.name_municipality',
             'provinces.name_province',
-            'departamentos.nombre',
+            'departamentos.name_department',
         ]);
     }
     protected static function show_community($id){
@@ -45,7 +45,7 @@ class Community extends Model
             'communities.updated_at',
             'municipalities.name_municipality',
             'provinces.name_province',
-            'departamentos.nombre',
+            'departamentos.name_department',
         ]);
     }
     protected static function find_cominity_edit($id){

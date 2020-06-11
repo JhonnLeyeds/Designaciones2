@@ -46,7 +46,7 @@ class EstableSalud extends Model
             'estable_saluds.updated_at',
             'municipalities.name_municipality',
             'provinces.name_province',
-            'departamentos.nombre',
+            'departamentos.name_department',
         ]);
     }
     protected static function find_edit_medicalCenter($id){

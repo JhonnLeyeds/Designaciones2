@@ -25,7 +25,7 @@ class Province extends Model
             'provinces.cod_prov',
             'provinces.created_at',
             'provinces.updated_at',
-            'departamentos.nombre',
+            'departamentos.name_department',
         ]);
     }
     protected function show_province($id){
@@ -38,7 +38,7 @@ class Province extends Model
             'provinces.cod_prov',
             'provinces.created_at',
             'provinces.updated_at',
-            'departamentos.nombre',
+            'departamentos.name_department',
         ]);
     }
     protected static function edit_province($id){
