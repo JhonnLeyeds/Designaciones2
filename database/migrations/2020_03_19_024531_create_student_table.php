@@ -29,7 +29,7 @@ class CreateStudentTable extends Migration
             $table->unsignedBigInteger('carrer_id');
             $table->unsignedBigInteger('caso_esp');
             $table->foreign('insti_id')->references('id')->on('institutes');
-            $table->foreign('carrer_id')->references('id')->on('carrer');
+            $table->foreign('carrer_id')->references('id')->on('career');
             $table->foreign('caso_esp')->references('id')->on('casos');
             
             $table->unsignedBigInteger('user_create');
