@@ -9,13 +9,20 @@ Route::get('/', 'HomeController@index')->name('home');
 //Configuracion para usar el middleware de los roles en las rutas
 Route::middleware(['auth'])->group(function(){
     //Rutas para manejar los roles del sistema
-    Route::get('roles','RoleController@index')->name('index_roles')->middleware('permission:index_roles');
+    /*Route::get('roles','RoleController@index')->name('index_roles')->middleware('permission:index_roles');
     Route::get('create_roles','RoleController@create')->name('create_roles')->middleware('permission:create_roles');
     Route::post('store_roles','RoleController@store')->name('store_roles')->middleware('permission:store_roles');
     Route::post('delete_role','RoleController@delete')->name('delete_role')->middleware('permission:delete_roles');
     Route::post('show_role','RoleController@show')->name('show_role')->middleware('permission:show_roles');
     Route::post('edit_role','RoleController@edit')->name('edit_role')->middleware('permission:edit_roles');
-    Route::post('update_role/{role}','RoleController@update')->name('update_role')->middleware('permission:update_roles');
+    Route::post('update_role/{role}','RoleController@update')->name('update_role')->middleware('permission:update_roles');*/
+    Route::get('roles','RoleController@index')->name('index_roles');
+    Route::get('create_roles','RoleController@create')->name('create_roles');
+    Route::post('store_roles','RoleController@store')->name('store_roles');
+    Route::post('delete_role','RoleController@delete')->name('delete_role');
+    Route::post('show_role','RoleController@show')->name('show_role');
+    Route::post('edit_role','RoleController@edit')->name('edit_role');
+    Route::post('update_role/{role}','RoleController@update')->name('update_role');
     //Fin Rutas para los roles del sistema
 
     //Rutas para Usuarios

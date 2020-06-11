@@ -13,7 +13,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        $this->call(UserTableSeeder::class);
+        /*Model::unguard();
         try {
             Schema::disableForeignKeyConstraints();
 
@@ -22,6 +23,6 @@ class DatabaseSeeder extends Seeder
             Schema::enableForeignKeyConstraints();
          } catch (\Throwable $th){
             return $th->getMessage();
-         }
+         }*/
     }
 }

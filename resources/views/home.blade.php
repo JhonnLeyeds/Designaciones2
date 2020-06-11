@@ -106,7 +106,6 @@
         </div>
 	  </li>
 	  @endcan
-	  @can('index_roles')
 	  <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage_roles" aria-expanded="true"
           aria-controls="collapsePage_roles">
@@ -118,8 +117,7 @@
             <a class="collapse-item load_url" href="{{ route('index_roles') }}">Roles</a>
           </div>
         </div>
-	  </li>
-	  @endcan      
+	  </li>    
       <div class="version" id="version-ruangadmin"></div>
     </ul>
     <!-- Sidebar -->
