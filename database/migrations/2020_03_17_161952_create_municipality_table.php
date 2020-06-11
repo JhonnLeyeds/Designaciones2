@@ -17,9 +17,8 @@ class CreateMunicipalityTable extends Migration
             $table->bigIncrements('id');
             $table->integer('cod_muni');
             $table->string('name_municipality');
-            $table->unsignedBigInteger('cod_prov');
+            $table->integer('cod_prov');
             $table->unsignedBigInteger('cod_red');
-            $table->foreign('cod_prov')->references('cod_prov')->on('provincie');
             $table->unsignedBigInteger('id_province');
             $table->foreign('id_province')->references('id')->on('province');
             $table->unsignedBigInteger('user_create');

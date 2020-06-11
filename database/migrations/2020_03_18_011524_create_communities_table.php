@@ -19,8 +19,7 @@ class CreateCommunitiesTable extends Migration
             $table->string('name_community');
             $table->unsignedBigInteger('id_muni');
             $table->foreign('id_muni')->references('id')->on('municipalities');
-            $table->unsignedBigInteger('cod_muni');
-            $table->foreign('cod_muni')->references('cod_muni')->on('municipalities');
+            $table->integer('cod_muni');
             $table->unsignedBigInteger('user_create');
             $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
