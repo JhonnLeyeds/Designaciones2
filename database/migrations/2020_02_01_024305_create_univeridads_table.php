@@ -16,8 +16,8 @@ class CreateUniveridadsTable extends Migration
         Schema::create('univeridads', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_university');
-            $table->unsignedBigInteger('municipality_id');
-            $table->foreign('municipality_id')->references('id')->on('municipalities');
+            $table->unsignedBigInteger('id_municipality');
+            $table->foreign('id_municipality')->references('id')->on('municipalities');
             $table->unsignedBigInteger('user_create');
             $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();
