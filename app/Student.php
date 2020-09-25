@@ -26,9 +26,13 @@ class Student extends Model
         'caso_esp',
 
     ];
+    protected function view_test(){
+        return \DB::table('student')   
+                    ->get();
+    }
     protected static function show_student($id){
-        $test = \DB::table('student')->where('student.id', '=', $id)->get(['insti_id','carrer_id'])->first();  
-        if($test->insti_id === 1){
+        $test = \DB::table('student')->where('student.id', '=', $id)->get(['insti_id','carrer_id','type'])->first();  
+        if($test->type === 1){
             return \DB::table('student')
             ->join('career','career.id','=','student.carrer_id')
             ->join('faculties','faculties.id','=','career.faculty_id')
@@ -52,13 +56,13 @@ class Student extends Model
                 'student.sexo',
                 'career.name_career',
                 'faculties.name_faculty',
-                'univeridads.nombre',
+                'univeridads.name_university',
                 'municipalities.name_municipality',
                 'provinces.name_province',
                 'departamentos.name_department AS name_depart',
             ])->first();
         }else{
-            if($test->carrer_id === 1){
+            if($test->type === 0){
             return \DB::table('student')
                 ->join('careers_institute','careers_institute.id','=','student.insti_id')
                 ->join('institutes','institutes.id','=','careers_institute.institute_id')

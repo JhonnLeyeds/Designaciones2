@@ -9,7 +9,7 @@
                     {!! $action ?? '' !!}    
                 </div>
             </div>
-        </div> <hr>
+        </div>
         <div class="card-body">
             {!! $bodycard ?? '' !!}
         </div>

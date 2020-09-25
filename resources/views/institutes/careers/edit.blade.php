@@ -90,10 +90,26 @@
                                         <small class="text-danger" id=""></small>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="nombre">Nombre Carrera</label>
                                         <input type="text" class="change_select form-control name_form" value="{{ $institute_career_edit[0]->name_career }}" name="name_career" placeholder="Ingrese Nombre del Instituto">
+                                        <small class="text-danger" id=""></small>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="">Tipo de Internado</label>                                           
+                                        <select name="type_int" id="type_int" class="change_select form-control select2bs4 select2-danger name_form">
+                                            <option value=""> Seleccione un Tipo de Internado</option>
+                                            @foreach($types_int as $i)
+                                                @if($institute_career_edit[0]->type_internation == $i->id)
+                                                    <option selected value="{{ $i->id }}">{{ $i->name_type }}</option>
+                                                @else
+                                                    <option value="{{ $i->id }}">{{ $i->name_type }}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
                                         <small class="text-danger" id=""></small>
                                     </div>
                                 </div>

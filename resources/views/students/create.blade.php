@@ -1,6 +1,6 @@
 @component('components.create_card')
     @slot('title')
-		Registrar Nuevo Estudiante
+		Registrar Nuevo Estudiantes
     @endslot    
 	@slot('bodycard')
 	<form  action="{{ route('store_students') }}" method="POST" class="save_date"> 

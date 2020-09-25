@@ -1,0 +1,96 @@
+.my_title{
+    margin-top: -1em;
+    margin-left: -02%;
+    background-color: rgb(76, 95, 218);
+    padding: 0.2em 0;
+    width: 20%;
+    border-top-right-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+}
+.my_title h6{
+    color:#fff;
+    text-align: center;
+}
+.file_1{
+    background-color: rgba(76, 95, 218,0.2);
+    margin: 10%;
+}
+.file_1 img{
+    margin-top: 10%;
+    width: 50%;
+    height: 50%;
+}
+.datos{
+    padding: 1em;
+    width: 100%;
+}
+.fila{
+    color: #fff;
+    margin-top: 10px;
+    background-color: rgba(76, 95, 218,0.4);
+    border-radius: 5px;
+}
+.fila p{
+    margin-left: 10px;
+}
+.fila_2{
+    margin-top: 5%;
+    margin-right: 5%;
+    margin-left: -5%;
+    background-color: rgba(76, 95, 218,0.2);
+    padding-bottom: 30px;
+}
+.title_2{
+    background-color: rgb(76, 95, 218);
+    width: 30%;
+    color:#fff;
+    text-align: center;
+    border-top-right-radius: 1.5em;
+    border-bottom-right-radius: 1.5em;
+}
+.title_2 h6{
+    padding: 5px;
+}
+.datos_filas{
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 100%;
+}
+.title_date{
+    color: #fff;
+    background-color: rgba(76, 95, 218,0.4);
+    border-radius: 5px;
+    display: inherit;
+    margin-left: 20px;
+    padding-left: 20px;
+    width: 30%;
+    height: 2em;
+}
+.content_date{
+    color: rgb(53, 52, 52);
+    background-color: rgb(255, 255, 255);
+    width: 60%;
+    margin-left: 30%;
+    margin-top: -30px;
+    height: 27px;
+    border-radius: 1.2em;
+}
+.content_date p{
+    margin-left: 10px;
+}
+.mar{
+    margin-top: 15px;
+}
+.fila_2_1{
+    margin-top: 3%;
+    margin-right: 5%;
+    margin-left: -5%;
+    background-color: rgba(76, 95, 218,0.2);
+    padding-bottom: 30px;
+}
+.mtop-16{
+    margin-top: 20px;
+}
+.title_table{
+    background-color: red;
+}

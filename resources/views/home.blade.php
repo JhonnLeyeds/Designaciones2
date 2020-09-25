@@ -91,7 +91,37 @@
           </div>
         </div>
 	  </li>
+    @endcan
+    @can('index_designations')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_designations" aria-expanded="true"
+          aria-controls="collapse_designations">
+          <i class="fas fa-fw fa-columns"></i>
+          <span>Gestión Disgnaciones</span>
+        </a>
+        <div id="collapse_designations" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_internship_types') }}">Tipos de Internado</a>
+            <a class="collapse-item load_url" href="{{ route('index_quotas') }}">Cupos</a>
+          </div>
+        </div>
+	  </li>
 	  @endcan
+    @can('designation')
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse_designation" aria-expanded="true"
+          aria-controls="collapse_designation">
+          <i class="fas fa-fw fa-columns"></i>
+          <span>Designacionar</span>
+        </a>
+        <div id="collapse_designation" class="collapse" aria-labelledby="headingPage" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <a class="collapse-item load_url" href="{{ route('index_internship_draw') }}">Ver Designaciones</a>
+            <a class="collapse-item load_url" href="{{ route('start_designation') }}">Sorteo Internados</a>
+          </div>
+        </div>
+      </li>
+    @endcan
 	  @can('index_users')
 	  <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePage_user" aria-expanded="true"

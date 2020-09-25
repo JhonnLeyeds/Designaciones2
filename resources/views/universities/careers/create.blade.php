@@ -21,7 +21,7 @@
                                         <   option value="">No hay Departamentos Registrados</option>
                                         @endforelse
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -30,7 +30,7 @@
                                     <select name="id_province" id="provinces" class="change_select form-control select2bs4 select2-danger clear_options name_form">
                                         <option value="">No hay Provincias</option>
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -39,7 +39,7 @@
                                     <select name="id_municipality" id="municipalities" class="charge_university change_select form-control select2bs4 select2-danger clear_options_prov name_form">
                                         <option value="">No hay Municipios</option>
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>    
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                                     <select name="id_university" id="university" class="charge_faculties change_select delete_u delete_option form-control select2bs4 select2-danger name_form">
                                         <option value="">No hay Universidades</option>
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>    
                             </div>
                             <div class="col-md-6">
@@ -66,7 +66,7 @@
                                     <select name="id_faculty" id="id_faculties" class="option_default delete_fa change_select form-control select2bs4 select2-danger name_form">
                                         <option value="">No hay Facultades</option>
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                         </div>  
@@ -75,7 +75,19 @@
                                 <div class="form-group">
                                     <label for="name_cereer">NOMBRE CARRERA</label>
                                     <input type="text" class="change_select form-control name_form" name="name_career" placeholder="Ingrese Nombre la Carrera">
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="name_cereer">TIPO INTERNADO</label>
+                                    <select name="type_in" id="type_in" class="change_select form-control select2bs4 select2-danger name_form">
+                                        <option value="">Seleccione un tipo de Internado</option>
+                                        @foreach ($types_internations as $item)
+                                            <option value="{{ $item->id }}"> {{ $item->name_type }}</option>
+                                        @endforeach                                        
+                                    </select>
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                         </div>

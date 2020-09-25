@@ -42,7 +42,7 @@
         @endslot
         @slot('action')
             @can('create_universities')
-                <a href="{{ route('create_universities') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Agregar Nuevo Centro Medico</a> 
+                <a href="{{ route('create_universities') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Agregar Nueva Universidad</a> 
             @endcan
         @endslot
 @endcomponent

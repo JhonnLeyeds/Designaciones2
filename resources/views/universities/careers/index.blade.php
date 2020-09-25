@@ -41,7 +41,7 @@
         @endslot
         @slot('action')
             @can('create_careers')
-                <a href="{{ route('create_careers') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Agregar Nuevo Centro Medico</a> 
+                <a href="{{ route('create_careers') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Agregar Nueva Carrera</a> 
             @endcan
         @endslot
 @endcomponent

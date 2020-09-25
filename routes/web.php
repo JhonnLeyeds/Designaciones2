@@ -143,6 +143,54 @@ Route::middleware(['auth'])->group(function(){
     Route::post('edit_careers_institutes','InstituteController@edit_careers_institutes')->name('edit_careers_institutes')->middleware('permission:edit_careers_institutes');
     Route::post('update_careers_institutes/{id}','InstituteController@update_careers_institutes')->name('update_careers_institutes')->middleware('permission:update_careers_institutes');
 
+    //Rutas para tipos de Internados.
+    Route::get('internship_types','DesignationsController@index_internship_types')->name('index_internship_types')->middleware('permission:index_internship_types');
+    Route::get('create_internship_types','DesignationsController@create_internship_types')->name('create_internship_types')->middleware('permission:create_internship_types');
+    Route::post('store_internship_types','DesignationsController@store_internship_types')->name('store_internship_types')->middleware('permission:store_internship_types');
+    Route::post('delete_internship_types','DesignationsController@delete_internship_types')->name('delete_internship_types')->middleware('permission:delete_internship_types');
+    Route::post('show_internship_types','DesignationsController@show_internship_types')->name('show_internship_types')->middleware('permission:show_internship_types');
+    Route::post('edit_internship_types','DesignationsController@edit_internship_types')->name('edit_internship_types')->middleware('permission:edit_internship_types');
+    Route::post('update_internship_types/{id}','DesignationsController@update_internship_types')->name('update_internship_types')->middleware('permission:update_internship_types');
+
+    //Rutas para cupos para la designacioon
+    Route::get('quotas','DesignationsController@index_quotas')->name('index_quotas')->middleware('permission:index_quotas');
+    Route::get('create_quotas','DesignationsController@create_quotas')->name('create_quotas')->middleware('permission:create_quotas');
+    Route::post('store_quotas','DesignationsController@store_quotas')->name('store_quotas')->middleware('permission:store_quotas');
+    Route::post('delete_quotas','DesignationsController@delete_quotas')->name('delete_quotas')->middleware('permission:delete_quotas');
+    Route::post('show_quotas','DesignationsController@show_quotas')->name('show_quotas')->middleware('permission:show_quotas');
+    Route::post('edit_quotas','DesignationsController@edit_quotas')->name('edit_quotas')->middleware('permission:edit_quotas');
+    Route::post('update_quotas/{id}','DesignationsController@update_quotas')->name('update_quotas')->middleware('permission:update_quotas');
+        Route::post('load_medical_center_qoutas','DesignationsController@load_medical_center_qoutas')->name('load_medical_center_qoutas');
+        Route::get('report_certification/{id_}','DesignationsController@report_certification')->name('report_certification');
+        Route::get('report_memorandum/{id_}','DesignationsController@report_memorandum')->name('report_memorandum');
+
+    //Rutas para sorteo de designaciones view_designation quota_draw
+    //Route para iniciar sorteo de Designaciones
+    
+    Route::get('start_designation', 'DesignationsController@start_designation')->name('start_designation')->middleware('permission:start_designation');
+
+    Route::post('start_designation_insti', 'DesignationsController@start_designation_insti')->name('start_designation_insti')->middleware('permission:start_designation_insti');
+    
+    Route::post('start_student_univesity', 'DesignationsController@start_student_univesity')->name('start_student_univesity')->middleware('permission:start_student_univesity');
+    Route::post('start_student_institute', 'DesignationsController@start_student_institute')->name('start_student_institute')->middleware('permission:start_student_institute');
+
+    Route::get('internship_draw','DesignationsController@index_internship_draw')->name('index_internship_draw')->middleware('permission:index_internship_draw');
+    Route::post('start_designate','DesignationsController@start_designate')->name('start_designate')->middleware('permission:start_designate');
+    Route::post('view_designation','DesignationsController@view_designation')->name('view_designation')->middleware('permission:view_designation');
+
+    Route::post('view_designation_insti','DesignationsController@view_designation_insti')->name('view_designation_insti')->middleware('permission:view_designation_insti');
+
+    Route::post('quota_draw','DesignationsController@quota_draw')->name('quota_draw')->middleware('permission:quota_draw');
+    //sorte para estudianets de institutos
+    Route::post('quota_draw_insti','DesignationsController@quota_draw_insti')->name('quota_draw_insti')->middleware('permission:quota_draw_insti');
+
+    /* rutas para er las listas de estudaoine4ts designados*/
+    Route::post('list_student_univesity','DesignationsController@list_student_univesity')->name('list_student_univesity')->middleware('permission:list_student_univesity');
+    
+
+    Route::post('list_student_institute','DesignationsController@list_student_institute')->name('list_student_institute')->middleware('permission:list_student_institute');
+
+
     Route::resource('/usuarios', 'UserController');
     //rutas para la seccion de estudiantes
     Route::resource('/estudiantes', 'StudentController');
@@ -168,5 +216,16 @@ Route::middleware(['auth'])->group(function(){
     Route::post('/charge_career_insti', 'InstituteController@charge_career_insti');
     Route::post('/charge_career_institutes', 'InstituteController@charge_career_institutes');
     
-    
+    //Route para crear los excel
+    Route::get('export_students_excel', 'StudentController@export_students_excel')->name('export_students_excel');
+    Route::get('export_types_internships_excel', 'QuotasController@export_types_internships_excel')->name('export_types_internships_excel');
+    Route::get('export_quotas_excel', 'QuotasController@export_quotas_excel')->name('export_quotas_excel');
+    Route::get('export_designations_excel', 'DesignationsController@export_designations_excel')->name('export_designations_excel');
+
+
+    //Route para pdf 
+    Route::get('generate_students_pdf', 'StudentController@generate_students_pdf')->name('generate_students_pdf');
+    Route::get('generate_types_internships_pdf', 'QuotasController@generate_types_internships_pdf')->name('generate_types_internships_pdf');
+    Route::get('generate_quotas_pdf', 'QuotasController@generate_quotas_pdf')->name('generate_quotas_pdf');
+    Route::get('generate_designations_pdf', 'DesignationsController@generate_designations_pdf')->name('generate_designations_pdf');
 });

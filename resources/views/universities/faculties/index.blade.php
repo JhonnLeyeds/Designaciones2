@@ -21,7 +21,7 @@
                     <th scope="row">{{$a++}}</th>
                     <td>{{$r->name_faculty}}</td>
                     <td>{{$r->created_at}}</td>
-                    <td>{{$r->nombre}}</td>
+                    <td>{{$r->name_university}}</td>
                     <td>
                         @can('show_faculties')<a href="{{ route('show_faculties') }}" class="btn btn-success btn-sm show_function" value="{{ $r->id }}" title="Ver Facultad" data-original-title="More Color"> <i class="far fa-eye"></i> </a>@endcan
                         @can('edit_faculties')<a href="{{ route('edit_faculties') }}" class="btn btn-primary btn-sm edit_function"  value="{{ $r->id }}" title="Editar Facultad" data-original-title="More Color"> <i class="fas far fa-edit"></i> </a>@endcan
@@ -41,7 +41,7 @@
         @endslot
         @slot('action')
             @can('create_faculties')
-                <a href="{{ route('create_faculties') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Agregar Nuevo Departamento</a> 
+                <a href="{{ route('create_faculties') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Agregar Nueva Facultad</a> 
             @endcan
         @endslot
 @endcomponent

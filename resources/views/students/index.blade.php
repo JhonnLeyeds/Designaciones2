@@ -35,6 +35,8 @@
         @endslot
         @slot('action')
             @can('create_students')
+            <a href="{{ route('export_students_excel') }}" class="btn btn-sm btn-outline-success "> <i class="far fa-file-excel"></i> Generar EXCEL</a> 
+            <a href="{{ route('generate_students_pdf') }}" class="btn btn-sm btn-outline-danger "> <i class="far fa-file-pdf"></i> Generar PDF</a> 
             <a href="{{ route('create_students') }}" class="btn btn-sm btn-outline-primary click_charge_button"> <i class="fas fa-plus-circle"></i> Registrar Nuevo Estudiante</a> 
             @endcan
         @endslot

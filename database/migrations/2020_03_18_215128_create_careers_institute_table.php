@@ -20,7 +20,8 @@ class CreateCareersInstituteTable extends Migration
             // $table->unsignedBigInteger('insti_id');
             $table->foreign('institute_id')->references('id')->on('institutes');
             // $table->foreign('insti_id')->references('id')->on('institutos');
-            
+            $table->unsignedBigInteger('type_internation');
+            $table->foreign('type_internation')->references('id')->on('internation_types');
             $table->unsignedBigInteger('user_create');
             $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();

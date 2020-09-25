@@ -76,7 +76,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="nombre">Nombre Universidad</label>
-                                        <input type="text" class="change_select form-control name_form" value="{{ $univercity_edit[0]->nombre }}" name="nombre" placeholder="Ingrese Nombre del Centro Medico">
+                                        <input type="text" class="change_select form-control name_form" value="{{ $univercity_edit[0]->name_university }}" name="name_university" placeholder="Ingrese Nombre del Centro Medico">
                                         <small class="text-red" id=""></small>
                                     </div>
                                 </div>

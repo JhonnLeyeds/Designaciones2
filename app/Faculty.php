@@ -23,7 +23,7 @@ class Faculty extends Model
             'faculties.name_faculty',
             'faculties.description',
             'faculties.created_at',
-            'univeridads.nombre',
+            'univeridads.name_university',
         ]);
     }
     protected static function show_faculty($id){
@@ -36,7 +36,7 @@ class Faculty extends Model
                 'faculties.description',
                 'faculties.created_at',
                 'faculties.updated_at',
-                'univeridads.nombre',
+                'univeridads.name_university',
             ]);
     }
     protected static function find_edit_faculty($id){        

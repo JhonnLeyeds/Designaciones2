@@ -40,6 +40,7 @@ class CareerInstitute extends Model
             ->where('careers_institute.id','=',$id)
             ->get([
                 'careers_institute.id',
+                'careers_institute.type_internation',
                 'careers_institute.name_career',
                 'careers_institute.institute_id',
                 'institutes.municipality_id AS id_municipality',
@@ -53,5 +54,8 @@ class CareerInstitute extends Model
             ->where('careers_institute.institute_id','=',$id)
             ->get();
 
+    }
+    public function show_careers_institutes($id){
+        return "ASDsadsad";
     }
 }

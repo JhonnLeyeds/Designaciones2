@@ -20,7 +20,7 @@
                                         <   option value="">No hay Departamentos Registrados</option>
                                         @endforelse
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -28,7 +28,7 @@
                                     <select name="id_province" id="provinces" class="change_select form-control select2bs4 select2-danger clear_options name_form">
                                         <option value="">No hay Provincias</option>
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -36,7 +36,7 @@
                                     <select name="id_municipality" id="municipalities" class="change_select form-control select2bs4 select2-danger clear_options_prov name_form">
                                         <option value="">No hay Municipios</option>
                                     </select>
-                                    <small class="text-red" id=""></small>
+                                    <small class="text-danger" id=""></small>
                                 </div>    
                             </div>
                         </div>
@@ -50,8 +50,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="change_select form-control name_form" name="nombre" placeholder="Ingrese Nombre del Centro Medico">
-                                    <small class="text-red" id=""></small>
+                                    <input type="text" class="change_select form-control name_form" name="name_university" placeholder="Ingrese Nombre de la Facultad">
+                                    <small class="text-danger" id=""></small>
                                 </div>
                             </div>
                         </div>   

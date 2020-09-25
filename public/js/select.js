@@ -4,6 +4,38 @@ $(function(){
         $("#global_content").load($(this).attr('href'))
         return false;
     });  
+    $(document).on('click','.start_load_url',function(e){
+        e.preventDefault(e)
+        $.ajax({
+        	type:'POST',
+        	url:$(this).attr('href'),
+        	data:{_token:$('meta[name="csrf-token"]').attr('content')},
+        	success:function(data){
+                $("#global_content").html(data)
+                return false;
+        	},
+        	error:function(data){
+        	}
+        })
+    });
+    $(document).on('change','.load_medical_center_qoutas',function(e){
+        $('#medical_center option').remove();
+        e.preventDefault(e)
+        $.ajax({
+        	type:'POST',
+        	url:'load_medical_center_qoutas',
+        	data:{id:$(this).find(":selected").val(),_token:$('meta[name="csrf-token"]').attr('content')},
+        	success:function(data){
+                $('#medical_center').append('<option>--Seleccione--</option>');
+                for(var i = 0; i < data.length; i++){
+                    $('#medical_center').append('<option value=' + data[i].id + '>' + data[i].name_estable_salud + '</option>');
+                }
+                return false;
+        	},
+        	error:function(data){
+        	}
+        })
+    })
     $(document).on('change','.load_career_faculties',function(e){
         $('#select_careers option').remove();
         e.preventDefault(e)
@@ -118,7 +150,7 @@ $(function(){
             success:function(data){
                 $('#university').append('<option>--Seleccione--</option>');
                 for(var i = 0; i < data.length; i++){
-                    $('#university').append('<option value=' + data[i].id + '>' + data[i].nombre + '</option>');
+                    $('#university').append('<option value=' + data[i].id + '>' + data[i].name_university + '</option>');
                 }
             },
             error:function(data){
@@ -231,6 +263,8 @@ $(function(){
         $('.option_default').append('<option>  No hay Facultades  </option>');
         $('#municipalities').append('<option>  No hay Municipios  </option>');
         $('#career_insti').append('<option>  No hay Institutos  </option>');
+        $('#medical_center').append('<option>  No hay Centros Medicos  </option>');
+        
         e.preventDefault(e)
         $.ajax({
         	type:'POST',
@@ -260,6 +294,8 @@ $(function(){
         $('#id_faculties').append('<option>--  No hay Facultades  --</option>');
         $('#career_insti option').remove();
         $('#career_insti').append('<option>--  No hay Institutos  --</option>');
+        $('#medical_center option').remove();
+        $('#medical_center').append('<option>  No hay Centros Medicos  </option>');
         e.preventDefault(e)
         $.ajax({
         	type:'POST',

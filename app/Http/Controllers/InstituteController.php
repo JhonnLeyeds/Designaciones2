@@ -7,6 +7,7 @@ use App\Instituto;
 use App\Province;
 use App\Departamento;
 use App\CareerInstitute;
+use App\InternshipTipes;
 class InstituteController extends Controller
 {
     public function index_institutes(){
@@ -112,8 +113,9 @@ class InstituteController extends Controller
         return view('institutes.careers.index',compact('careers_institute'));
     }
     public function create_careers_institutes(){
+        $types_int = InternshipTipes::get_types_institute();
         $departments = Departamento::get();
-        return view('institutes.careers.create',compact('departments'));
+        return view('institutes.careers.create',compact('departments','types_int'));
     }
     public function store_careers_institutes(Request $request, CareerInstitute $id){
         $status = 'success';
@@ -134,6 +136,7 @@ class InstituteController extends Controller
         ]);
         $career = new CareerInstitute();
         $career->name_career = request ('name_career');
+        $career->type_internation = request ('type_int');
 		$career->institute_id = $request->id_institute;
         $career->user_create = \Auth::user()->id;
         $career->save();
@@ -144,6 +147,7 @@ class InstituteController extends Controller
             ]);
     }
     public function edit_careers_institutes(Request $request){
+        $types_int = InternshipTipes::get_types_institute();
         $institute_career_edit = CareerInstitute::find_edit_institute_career($request->id);
         $departments = Departamento::all();        
 		$prov = Province::find($institute_career_edit[0]->id);
@@ -156,7 +160,7 @@ class InstituteController extends Controller
         $institutes = \DB::table('institutes')
 			->where('institutes.municipality_id','=',$institute_career_edit[0]->id_municipality)
 		->get();
-        return view('institutes.careers.edit',compact('institutes','institute_career_edit','departments','prov','province','municipalities'));
+        return view('institutes.careers.edit',compact('types_int','institutes','institute_career_edit','departments','prov','province','municipalities'));
     }
     public function update_careers_institutes(Request $request,  CareerInstitute $id){
         $status = 'success';
@@ -166,7 +170,7 @@ class InstituteController extends Controller
 			'id_province' => 'numeric',
             'id_municipality' => 'numeric',
             'id_institute' => 'numeric',
-            'name_career' => 'required|unique:careers_institute',     
+            'name_career' => 'required|unique:careers_institute,name_career,'.$id->id,
         ],[
             'name_career.required' => 'El Nombre de la Carrera es Requerido',
 			'name_career.unique' => 'El Nombre de la Carrera ya está en uso',
@@ -179,6 +183,7 @@ class InstituteController extends Controller
             $save_career_institute = CareerInstitute::find($request->id->id);
             $save_career_institute->name_career = $request->name_career;
             $save_career_institute->institute_id = $request->id_institute;
+            $save_career_institute->type_internation = $request->type_int;
             $save_career_institute->user_create = \Auth::user()->id;
             $save_career_institute->save();
         } catch (\Throwable $th) {
@@ -190,6 +195,9 @@ class InstituteController extends Controller
                 'status' => $status,
                 'content' => $conent
             ]);
+    }
+    public function show_careers_institutes(Request $request){
+        return "falta esto ";
     }
     public function delete_careers_institutes(Request $request){
         $name = CareerInstitute::find($request->id);

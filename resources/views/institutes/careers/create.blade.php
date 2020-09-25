@@ -60,10 +60,22 @@
                                     <small class="text-danger" id=""></small>
                                 </div>
                             </div>
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="">Nombre Carrera</label>
                                     <input type="text" class="change_select form-control name_form" name="name_career" placeholder="Ingrese Nombre del Instituto">
+                                    <small class="text-danger" id=""></small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="">Tipo de Internado</label>                                           
+                                    <select name="type_int" id="type_int" class="change_select form-control select2bs4 select2-danger name_form">
+                                        <option value=""> Seleccione un Tipo de Internado</option>
+                                        @foreach($types_int as $i)
+                                            <option value="{{ $i->id }}">{{ $i->name_type }}</option>
+                                        @endforeach
+                                    </select>
                                     <small class="text-danger" id=""></small>
                                 </div>
                             </div>

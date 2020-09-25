@@ -79,9 +79,9 @@
                                         <select name="id_university" id="university" class="change_select delete_u delete_option form-control select2bs4 select2-danger name_form">
                                             @forelse($universities as $d)
                                                 @if($career_edit[0]->id_municipality === $d->id)            
-                                                <option selected value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                <option selected value="{{ $d->id }}">{{ $d->name_university }}</option>
                                                 @else
-                                                <option value="{{ $d->id }}">{{ $d->nombre }}</option>
+                                                <option value="{{ $d->id }}">{{ $d->name_university }}</option>
                                                 @endif
                                             @empty
                                                 <option value="">No hay Departamentos Registrados</option>
@@ -116,7 +116,22 @@
                                         <small class="text-red" id=""></small>
                                     </div>
                                 </div>
-                                <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="name_cereer">TIPO INTERNADO</label>
+                                        <select name="type_in" id="type_in" class="change_select form-control select2bs4 select2-danger name_form">
+                                            <option value="">Seleccione un tipo de Internado</option>
+                                            @foreach ($types_internations as $item)
+                                                @if($career_edit[0]->type_internation === $item->id) 
+                                                    <option selected value="{{ $item->id }}"> {{ $item->name_type }}</option>
+                                                @else
+                                                    <option value="{{ $item->id }}"> {{ $item->name_type }}</option>
+                                                @endif
+                                            @endforeach                                        
+                                        </select>
+                                        <small class="text-danger" id=""></small>
+                                    </div>
+                                </div>
                             </div> 
                             <div class="row">
                                 <div class="col-md-12">

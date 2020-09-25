@@ -114,7 +114,7 @@
 					</div>
 					<div class="card-body">						
 						<div id="load_uni_inti">
-                            @if($student->carrer_id === 1)
+                            @if($student->type == 0)
                             <input type="hidden" name="type_uni_inst" value="instituto">
                             <div class="row">
                                 <input type="hidden" name="type_uni_inst" value="instituto">
@@ -270,9 +270,9 @@
                                         <select name="id_university" id="university" class="charge_faculties change_select delete_u delete_option form-control select2bs4 select2-danger name_form">
                                             @forelse($universities as $d)
                                                 @if($uni->id_universidad === $d->id)            
-                                                <option selected value="{{ $d->id }}">{{ $d->name_department }}</option>
+                                                <option selected value="{{ $d->id }}">{{ $d->name_university }}</option>
                                                 @else
-                                                <option value="{{ $d->id }}">{{ $d->name_department }}</option>
+                                                <option value="{{ $d->id }}">{{ $d->name_university }}</option>
                                                 @endif
                                             @empty
                                                 <option value="">No hay Municipios Registrados</option>

@@ -22,11 +22,13 @@ class CreateStudentTable extends Migration
             $table->string('exp');
             $table->date('birth_date');
             $table->string('celular');
+            $table->boolean('type');
             $table->string('correo');
             $table->string('direccion');
             $table->string('sexo');
             $table->unsignedBigInteger('insti_id');
             $table->unsignedBigInteger('carrer_id');
+            $table->unsignedBigInteger('level_ac');
             $table->unsignedBigInteger('caso_esp');
             $table->foreign('insti_id')->references('id')->on('careers_institute');
             $table->foreign('carrer_id')->references('id')->on('career');

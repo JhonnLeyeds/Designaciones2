@@ -58,7 +58,7 @@
                         </tr>   
                         <tr>
                             <th style="width:50%">Universidad:</th>
-                            <td>{{ $student->nombre }}</td>
+                            <td>{{ $student->name_university }}</td>
                         </tr>    
                         <tr>
                             <th style="width:50%">Municipio:</th>

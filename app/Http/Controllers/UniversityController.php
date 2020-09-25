@@ -9,6 +9,7 @@ use App\Departamento;
 use App\Province;
 use App\Carrer;
 use App\Faculty;
+use App\InternshipTipes;
 use App\Rules\ContrasenaFuerte;
 
 class UniversityController extends Controller
@@ -31,16 +32,16 @@ class UniversityController extends Controller
 			'id_department' => 'numeric',
 			'id_province' => 'numeric',
             'id_municipality' => 'numeric',
-            'nombre' => 'required|unique:univeridads',     
+            'name_university' => 'required|unique:univeridads',     
         ],[
-            'nombre.required' => 'El Nombre de Universidad es Requerido',
-			'nombre.unique' => 'El valor del campo Universidad ya está en uso',
+            'name_university.required' => 'El Nombre de Universidad es Requerido',
+			'name_university.unique' => 'El valor del campo Universidad ya está en uso',
 			'id_municipality.numeric' => 'Seleccione un Municipio',
 			'id_province.numeric' => 'Seleccione una Provincia',
             'id_department.numeric' => 'Seleccione un Departamento',            
         ]);
         $univercity = new Univeridad();
-        $univercity->nombre = request ('nombre');
+        $univercity->name_university = request ('name_university');
 		$univercity->id_municipality = $request->id_municipality;
         $univercity->user_create = \Auth::user()->id;
         $univercity->save();
@@ -64,21 +65,21 @@ class UniversityController extends Controller
 			'id_department' => 'numeric',
 			'id_province' => 'numeric',
             'id_municipality' => 'numeric',
-            'nombre' => 'required|unique:univeridads,nombre,'.$univercity_update->id,
+            'name_university' => 'required|unique:univeridads,name_university,'.$univercity_update->id,
         ],[
-            'nombre.required' => 'El Nombre de Universidad es Requerido',
-			'nombre.unique' => 'El valor del campo Universidad ya está en uso',
+            'name_university.required' => 'El Nombre de Universidad es Requerido',
+			'name_university.unique' => 'El valor del campo Universidad ya está en uso',
 			'id_municipality.numeric' => 'Seleccione un Municipio',
 			'id_province.numeric' => 'Seleccione una Provincia',
             'id_department.numeric' => 'Seleccione un Departamento',            
         ]);
         $save_university = Univeridad::find($univercity_update->id);
-        $save_university->nombre = $univercity_update->nombre;
+        $save_university->name_university = $univercity_update->name_university;
 		$save_university->id_municipality = $univercity_update->id_municipality;
         $save_university->user_create = \Auth::user()->id;
         $save_university->save();
         return redirect()->route('index_universities', $save_university->id)
-            ->with('info', 'Los Registros de la Universidad'. $univercity_update->nombre .'fue actualizada con  éxito');
+            ->with('info', 'Los Registros de la Universidad'. $univercity_update->name_university .'fue actualizada con  éxito');
     }
     public function index_faculties(){
         $faculties = Faculty::view_faculties();
@@ -164,8 +165,9 @@ class UniversityController extends Controller
         return view('universities.careers.index',compact('careers'));
     }
     public function create_careers(){
+        $types_internations = InternshipTipes::get_type_int();
         $departments = Departamento::get();
-        return view('universities.careers.create',compact('departments'));
+        return view('universities.careers.create',compact('departments','types_internations'));
     }
     public function store_careers(Request $request){
         $request->validate([
@@ -187,7 +189,8 @@ class UniversityController extends Controller
         $career = new Carrer();
         $career->name_career = request ('name_career');
         $career->description = request ('description');
-		$career->faculty_id = $request->id_university;
+        $career->type_internation = request ('type_in');
+		$career->faculty_id = $request->id_faculty;
         $career->user_create = \Auth::user()->id;
         $career->save();
         return redirect()->route('create_careers', $career->id)
@@ -198,10 +201,11 @@ class UniversityController extends Controller
         return view('universities.careers.show',compact('career'));
     }
     public function edit_careers(Request $request){    
+        $types_internations = InternshipTipes::get_type_int();
         $career_edit = Carrer::find_edit_career($request->id);
         $departments = Departamento::all();        
-		$prov = Province::find($career_edit[0]->id);
-		$province = \DB::table('provinces')
+		$prov = Province::find($career_edit[0]->id);        
+        $province = \DB::table('provinces')
 			->where('provinces.id_department','=',$career_edit[0]->id_department)
 		->get();
 		$municipalities = \DB::table('municipalities')
@@ -213,7 +217,7 @@ class UniversityController extends Controller
         $faculties = \DB::table('faculties')
 			->where('faculties.id_university','=',$career_edit[0]->id_university)
 		->get();    
-        return view('universities.careers.edit',compact('career_edit','departments', 'prov', 'province','municipalities','universities','faculties'));
+        return view('universities.careers.edit',compact('types_internations','career_edit','departments', 'prov', 'province','municipalities','universities','faculties'));
     }
     public function update_careers(Request $request, $id){
         $request->validate([
@@ -235,7 +239,8 @@ class UniversityController extends Controller
         $update_career = Carrer::find($request->id);
         $update_career->name_career = $request->name_career;
         $update_career->description = $request->description;
-		$update_career->faculty_id = $request->id_faculty;
+        $update_career->type_internation = $request->type_in;
+        $update_career->faculty_id = $request->id_faculty;
         $update_career->user_create = \Auth::user()->id;
         $update_career->save();
         return redirect()->route('index_careers', $update_career->id)

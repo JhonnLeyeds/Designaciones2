@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Caso;
 use App\Departamento;
 use App\Student;
-use App\Province;
-use App\Univeridad;
+use App\Carrer;
+use App\CareerInstitute;
+use App\Exports\StudentsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Console\Presets\React;
 use Illuminate\Http\Request;
@@ -96,6 +98,7 @@ class StudentController extends Controller
                 'id_career.numeric' => 'Seleccione una Carrera',
                       
             ]);
+                $type_internship = Carrer::find($request->id_career);
                 $new_student = new Student();
                 $new_student->name = request ('name_student');
                 $new_student->ap_pat = request ('a_paterno');
@@ -107,6 +110,8 @@ class StudentController extends Controller
                 $new_student->correo = request ('email');
                 $new_student->direccion = request ('addrees');
                 $new_student->sexo = request ('genero');
+                $new_student->level_ac = $type_internship->type_internation;
+                $new_student->type = true;
                 $new_student->insti_id = 1;
                 $new_student->carrer_id = request ('id_career');
                 $new_student->caso_esp = 1;
@@ -150,6 +155,7 @@ class StudentController extends Controller
                 'id_institute.numeric' => 'Seleccione un Instituto',
                 'id_career.numeric' => 'Seleccione una Carrera',
             ]);
+                $type_internship = CareerInstitute::find($request->id_career);
                 $new_student = new Student();
                 $new_student->name = request ('name_student');
                 $new_student->ap_pat = request ('a_paterno');
@@ -160,6 +166,8 @@ class StudentController extends Controller
                 $new_student->celular = request ('phone');
                 $new_student->correo = request ('email');
                 $new_student->sexo = request ('genero');
+                $new_student->level_ac = $type_internship->type_internation;
+                $new_student->type = false;
                 $new_student->direccion = request ('addrees');
                 $new_student->insti_id = request ('id_career');
                 $new_student->carrer_id = 1;
@@ -179,7 +187,7 @@ class StudentController extends Controller
     {        
         $student = (Student::edit_student($request->id));
         $departments = Departamento::all();          
-        if($student->carrer_id === 1){
+        if($student->type == 0){
             $uni = Student::edit_student_inst($request->id);
             $prov = Student::find_province($uni->id_depart);
             $municipalities = Student::find_municipalities($uni->id_province);
@@ -189,7 +197,7 @@ class StudentController extends Controller
             return view('students.edit',compact('student','uni','departments','prov','municipalities','institutes','careers_insitutes'));
             
             
-        }elseif($student->insti_id === 1){
+        }elseif($student->type == 1){
             //para universidades
             $uni = Student::edit_student_uni($request->id);
             $prov = Student::find_province($uni->id_depart);
@@ -392,5 +400,21 @@ class StudentController extends Controller
     public function load_insti(Request $request){
         $departments = Departamento::get();
         return view('students.components.institute',compact('departments'));
+    }
+    //funcion para exportar excel
+    public function export_students_excel() 
+    {
+        return Excel::download(new StudentsExport, 'invoices.xlsx');
+    }
+
+
+    //funciones para exportar pdf's
+    public function generate_students_pdf(){
+        setlocale(LC_ALL, 'es_ES');
+        $pdf = app('dompdf.wrapper');
+        $students = Student::view_test();
+        //$designate_date = \Carbon\Carbon::createFromTimeStamp(strtotime($dates->designation_date));
+        //$dat2 = $designate_date->formatLocalized(' %d de %B del %Y');
+        return \PDF::loadView('reports.students',compact('students'))->setPaper('letter', 'landscape')->stream('Estudantes Registrados.pdf');
     }
 }

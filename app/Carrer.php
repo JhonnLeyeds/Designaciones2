@@ -30,7 +30,7 @@ class Carrer extends Model
             'career.name_career',
             'career.created_at',
             'faculties.name_faculty',
-            'univeridads.nombre',
+            'univeridads.name_university',
         ]);
 
     }
@@ -49,7 +49,7 @@ class Carrer extends Model
                 'career.created_at',
                 'career.updated_at',
                 'faculties.name_faculty',
-                'univeridads.nombre',
+                'univeridads.name_university',
                 'municipalities.name_municipality',
                 'provinces.name_province',
                 'departamentos.name_department',
@@ -66,6 +66,7 @@ class Carrer extends Model
             ->get([
                 'career.faculty_id AS id_fa',
                 'career.name_career',
+                'career.type_internation',
                 'career.description',
                 'faculties.id_university',
                 'univeridads.id_municipality',

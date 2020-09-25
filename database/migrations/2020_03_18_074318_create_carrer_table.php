@@ -21,7 +21,8 @@ class CreateCarrerTable extends Migration
             // $table->unsignedBigInteger('insti_id');
             $table->foreign('faculty_id')->references('id')->on('faculties');
             // $table->foreign('insti_id')->references('id')->on('institutos');
-            
+            $table->unsignedBigInteger('type_internation');
+            $table->foreign('type_internation')->references('id')->on('internation_types');
             $table->unsignedBigInteger('user_create');
             $table->foreign('user_create')->references('id')->on('users');
             $table->timestamps();

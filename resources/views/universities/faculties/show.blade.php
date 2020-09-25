@@ -8,7 +8,7 @@
                 <table class="table">
                     <tbody>
                         <tr>
-                            <th style="width:50%">Nombre de la Universidad:</th>
+                            <th style="width:50%">Nombre de la Facultad:</th>
                             <td>{{ $d->name_faculty }}</td>
                         </tr>
                         <tr>
@@ -16,7 +16,7 @@
                             <td>{{ $d->description }}</td>
                         </tr>
                         <tr>
-                            <th>Fecha Registro Universidad:</th>
+                            <th>Fecha Registro Facultad:</th>
                             <td>{{ $d->created_at }}</td>
                         </tr>
                         <tr>
@@ -24,8 +24,8 @@
                             <td>{{ $d->updated_at }}</td>
                         </tr>
                         <tr>
-                            <th>Pertenece al Municipio:</th>
-                            <td>{{ $d->nombre }}</td>
+                            <th>Pertenece a la universidad:</th>
+                            <td>{{ $d->name_university }}</td>
                         </tr>
                     </tbody>
                 </table>
