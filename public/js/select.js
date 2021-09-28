@@ -4,6 +4,80 @@ $(function(){
         $("#global_content").load($(this).attr('href'))
         return false;
     });  
+    $(document).on('change','.change_load_view',function(e){
+        e.preventDefault(e)
+        $.ajax({
+        	type:'POST',
+        	url:'load_view',
+        	data:{id:$(this).find(":selected").val(),_token:$('meta[name="csrf-token"]').attr('content')},
+        	success:function(data){
+                $("#cargar_aqui_lista").html(data)
+        	},
+        	error:function(data){
+        	}
+        })
+    })
+    $(document).on('change','.load_medical_centers',function(e){
+        e.preventDefault(e)
+        $.ajax({
+        	type:'POST',
+        	url:'cargar_lsita_centros_medicos_cupos',
+        	data:{gestion:document.getElementById("gestion").value,periodo:$(this).find(":selected").val(),_token:$('meta[name="csrf-token"]').attr('content')},
+        	success:function(data){
+                $("#load_table_list").html(data)
+        	},
+        	error:function(data){
+        	}
+        })
+    })
+    $(document).on('change','.guardar_cupos',function(e){        
+        var res = $(this).attr("name").split("_");
+        var r = $(this).attr("name")
+        var cant_cupos = document.getElementById(r).value;
+        var id_centro_salud =  $('input[name=id_'+res[1]+']').val();
+        var ges =  $('input[name=ges_'+res[1]+']').val();
+        var per =  $('input[name=per_'+res[1]+']').val();
+        e.preventDefault(e)
+        $.ajax({
+        	type:'POST',
+        	url:'guardar_cupos',
+        	data:{cant_cupos,id_centro_salud,ges,per,res,_token:$('meta[name="csrf-token"]').attr('content')},
+        	success:function(data){
+                $('#medical_center').append('<option>--Seleccione--</option>');
+                for(var i = 0; i < data.length; i++){
+                    $('#medical_center').append('<option value=' + data[i].id + '>' + data[i].name_estable_salud + '</option>');
+                }
+                return false;
+        	},
+        	error:function(data){
+        	}
+        })
+    })
+    $(document).on('submit','.load_medical_centers',function(e){
+        var formData = new FormData($(this)[0]);
+        frutas = []
+        $('.name_form').each(function(){
+            aux = $(this).attr("name")
+            frutas.push(aux)
+        })
+        $.ajaxSetup({
+            header:$('meta[name="_token"]').attr('content')
+        })
+        e.preventDefault(e)
+        $.ajax({
+            type:$(this).attr('method'),
+            url:$(this).attr('action'),
+            data:formData,
+            contentType: false,
+            processData: false,
+            success:function(data){                
+                $("#load_table_list").html(data)                                   
+            },
+            error:function(data){
+                function_error(data)
+            }
+        })
+    })
     $(document).on('click','.start_load_url',function(e){
         e.preventDefault(e)
         $.ajax({
@@ -172,6 +246,21 @@ $(function(){
         	}
         })
     });
+    $(document).on('click','.load_students_view',function(e){
+        console.log('asdsadsad')
+        e.preventDefault(e)
+        $.ajax({
+        	type:'POST',
+        	url:$(this).attr('href'),
+        	data:{id:$(this).attr('value'),_token:$('meta[name="csrf-token"]').attr('content')},
+        	success:function(data){
+                $(".aqui_cargar").html(data)
+                return false;
+        	},
+        	error:function(data){
+        	}
+        })
+    });
     $(document).on('click','.button_back',function(e){
         e.preventDefault(e)
         $.ajax({
@@ -233,6 +322,31 @@ $(function(){
             processData: false,
             success:function(data){                
                 $("#global_content").html(data)                                   
+            },
+            error:function(data){
+                function_error(data)
+            }
+        })
+    })
+    $(document).on('submit','.save_dates',function(e){
+        var formData = new FormData($(this)[0]);
+        frutas = []
+        $('.name_form').each(function(){
+            aux = $(this).attr("name")
+            frutas.push(aux)
+        })
+        $.ajaxSetup({
+            header:$('meta[name="_token"]').attr('content')
+        })
+        e.preventDefault(e)
+        $.ajax({
+            type:$(this).attr('method'),
+            url:$(this).attr('action'),
+            data:formData,
+            contentType: false,
+            processData: false,
+            success:function(data){                
+                $(".aqui_cargar").html(data)                                   
             },
             error:function(data){
                 function_error(data)
@@ -383,6 +497,7 @@ $(function(){
         $("input[name='"+$(this).attr('name')+"']").removeClass("is-invalid")
         $("input[name='"+$(this).attr('name')+"']").parent().find("small").text('')
         $('#error_character').text('')
+        $('#id_periodo').text('')
     });
     function function_error(data){        
         var asd = Object.keys(data.responseJSON.errors)
@@ -391,6 +506,9 @@ $(function(){
         }
         if(data.responseJSON.errors.character){
             $('#error_character').text(data.responseJSON.errors.character[0])
+        }
+        if(data.responseJSON.errors.id_periodo){
+            $('#id_periodo').text(data.responseJSON.errors.id_periodo[0])
         }
         for(i = 0; i<frutas.length; i++){
             if(asd.includes(frutas[i])) {                

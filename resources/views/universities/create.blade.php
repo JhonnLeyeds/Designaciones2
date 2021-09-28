@@ -17,7 +17,7 @@
                                         @forelse($departments as $d)
                                             <option  value="{{ $d->id }}">{{ $d->name_department }}</option>
                                         @empty
-                                        <   option value="">No hay Departamentos Registrados</option>
+                                        <option value="">No hay Departamentos Registrados</option>
                                         @endforelse
                                     </select>
                                     <small class="text-danger" id=""></small>
@@ -50,7 +50,13 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <input type="text" class="change_select form-control name_form" name="name_university" placeholder="Ingrese Nombre de la Facultad">
+                                    <input type="text" class="change_select form-control name_form" name="name_university" placeholder="Ingrese Nombre de la Universidad">
+                                    <small class="text-danger" id=""></small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <input type="text" class="change_select form-control name_form" name="email_uni" placeholder="Ingrese correo electronico">
                                     <small class="text-danger" id=""></small>
                                 </div>
                             </div>

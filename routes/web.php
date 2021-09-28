@@ -143,6 +143,32 @@ Route::middleware(['auth'])->group(function(){
     Route::post('edit_careers_institutes','InstituteController@edit_careers_institutes')->name('edit_careers_institutes')->middleware('permission:edit_careers_institutes');
     Route::post('update_careers_institutes/{id}','InstituteController@update_careers_institutes')->name('update_careers_institutes')->middleware('permission:update_careers_institutes');
 
+    //Rutas para Gestion
+    Route::get('gestion','DesignationsController@index_gestion')->name('index_gestion')->middleware('permission:index_gestion');
+    Route::get('create_gestion','DesignationsController@create_gestion')->name('create_gestion')->middleware('permission:create_gestion');
+    Route::post('store_gestion','DesignationsController@store_gestion')->name('store_gestion')->middleware('permission:store_gestion');
+    Route::post('delete_gestion','DesignationsController@delete_gestion')->name('delete_gestion')->middleware('permission:delete_gestion');
+    Route::post('show_gestion','DesignationsController@show_gestion')->name('show_gestion')->middleware('permission:show_gestion');
+    Route::post('edit_gestion','DesignationsController@edit_gestion')->name('edit_gestion')->middleware('permission:edit_gestion');
+    Route::post('update_gestion/{id}','DesignationsController@update_gestion')->name('update_gestion')->middleware('permission:update_gestion');
+
+    //Rutas para periodos
+    Route::get('periods','DesignationsController@index_periodos')->name('index_periods')->middleware('permission:index_periods');
+    Route::get('create_periods','DesignationsController@create_periodos')->name('create_periods')->middleware('permission:create_periods');
+    Route::post('store_periods','DesignationsController@store_periodos')->name('store_periods')->middleware('permission:store_periods');
+    Route::post('delete_periods','DesignationsController@delete_periodos')->name('delete_periods')->middleware('permission:delete_periods');
+    Route::post('show_periods','DesignationsController@show_periodos')->name('show_periods')->middleware('permission:show_periods');
+    Route::post('edit_periods','DesignationsController@edit_periodos')->name('edit_periods')->middleware('permission:edit_periods');
+    Route::post('update_periods/{id}','DesignationsController@update_periodos')->name('update_periods')->middleware('permission:update_periods');
+
+    //Rutas para habilitar fechas y periodos para registro de estudiantes.    
+    Route::get('index_enable_periods','DesignationsController@index_enable_periods')->name('index_enable_periods')->middleware('permission:index_enable_periods');
+    Route::get('create_enable_periods','DesignationsController@create_enable_periods')->name('create_enable_periods')->middleware('permission:create_enable_periods');
+    Route::post('store_date_enabled','DesignationsController@store_date_enabled')->name('store_date_enabled')->middleware('permission:store_date_enabled');
+    Route::post('delete_date_enabled','DesignationsController@delete_date_enabled')->name('delete_date_enabled')->middleware('permission:delete_date_enabled');
+    Route::post('edit_date_enabled','DesignationsController@edit_date_enabled')->name('edit_date_enabled')->middleware('permission:edit_date_enabled');
+    Route::post('update_date_enabled','DesignationsController@update_date_enabled')->name('update_date_enabled')->middleware('permission:update_date_enabled');
+
     //Rutas para tipos de Internados.
     Route::get('internship_types','DesignationsController@index_internship_types')->name('index_internship_types')->middleware('permission:index_internship_types');
     Route::get('create_internship_types','DesignationsController@create_internship_types')->name('create_internship_types')->middleware('permission:create_internship_types');
@@ -151,6 +177,7 @@ Route::middleware(['auth'])->group(function(){
     Route::post('show_internship_types','DesignationsController@show_internship_types')->name('show_internship_types')->middleware('permission:show_internship_types');
     Route::post('edit_internship_types','DesignationsController@edit_internship_types')->name('edit_internship_types')->middleware('permission:edit_internship_types');
     Route::post('update_internship_types/{id}','DesignationsController@update_internship_types')->name('update_internship_types')->middleware('permission:update_internship_types');
+    
 
     //Rutas para cupos para la designacioon
     Route::get('quotas','DesignationsController@index_quotas')->name('index_quotas')->middleware('permission:index_quotas');
@@ -163,15 +190,24 @@ Route::middleware(['auth'])->group(function(){
         Route::post('load_medical_center_qoutas','DesignationsController@load_medical_center_qoutas')->name('load_medical_center_qoutas');
         Route::get('report_certification/{id_}','DesignationsController@report_certification')->name('report_certification');
         Route::get('report_memorandum/{id_}','DesignationsController@report_memorandum')->name('report_memorandum');
+        Route::post('cargar_lsita_centros_medicos_cupos','DesignationsController@cargar_lsita_centros_medicos_cupos')->name('cargar_lsita_centros_medicos_cupos')->middleware('permission:cargar_lsita_centros_medicos_cupos');
+        
+        Route::post('guardar_cupos','DesignationsController@guardar_cupos')->name('guardar_cupos')->middleware('permission:guardar_cupos');
+
+        //para ver lista de periodos 
+        Route::post('load_view','DesignationsController@load_view')->name('load_view');
 
     //Rutas para sorteo de designaciones view_designation quota_draw
-    //Route para iniciar sorteo de Designaciones
+    //Route para iniciar sorteo de Designaciones search_students_uni_
     
     Route::get('start_designation', 'DesignationsController@start_designation')->name('start_designation')->middleware('permission:start_designation');
 
     Route::post('start_designation_insti', 'DesignationsController@start_designation_insti')->name('start_designation_insti')->middleware('permission:start_designation_insti');
     
     Route::post('start_student_univesity', 'DesignationsController@start_student_univesity')->name('start_student_univesity')->middleware('permission:start_student_univesity');
+
+    Route::post('search_students_uni_', 'DesignationsController@search_students_uni_')->name('search_students_uni_')->middleware('permission:search_students_uni_');
+
     Route::post('start_student_institute', 'DesignationsController@start_student_institute')->name('start_student_institute')->middleware('permission:start_student_institute');
 
     Route::get('internship_draw','DesignationsController@index_internship_draw')->name('index_internship_draw')->middleware('permission:index_internship_draw');
@@ -228,4 +264,30 @@ Route::middleware(['auth'])->group(function(){
     Route::get('generate_types_internships_pdf', 'QuotasController@generate_types_internships_pdf')->name('generate_types_internships_pdf');
     Route::get('generate_quotas_pdf', 'QuotasController@generate_quotas_pdf')->name('generate_quotas_pdf');
     Route::get('generate_designations_pdf', 'DesignationsController@generate_designations_pdf')->name('generate_designations_pdf');
+
+
+
+// Rutas para la Universidad
+    Route::get('university','UniversityController@view_perfil')->name('view_perfil')->middleware('permission:administrar_universidades');
+    Route::get('index_my_faculties','UniversityController@index_my_faculties')->name('index_my_faculties')->middleware('permission:administrar_universidades');
+    Route::get('index_my_careers','UniversityController@index_my_careers')->name('index_my_careers')->middleware('permission:administrar_universidades');
+    Route::get('create_my_faculty','UniversityController@create_my_faculty')->name('create_my_faculty')->middleware('permission:administrar_universidades');
+    
+    Route::post('store_my_faculties','UniversityController@store_my_faculties')->name('store_my_faculties')->middleware('permission:administrar_universidades');
+    Route::get('my_careers','UniversityController@index_my_careers')->name('index_my_careers')->middleware('permission:administrar_universidades');
+
+    Route::get('create_my_careers','UniversityController@create_my_careers')->name('create_my_careers')->middleware('permission:administrar_universidades');
+    Route::post('store_my_careers','UniversityController@store_my_careers')->name('store_my_careers')->middleware('permission:administrar_universidades');
+    Route::get('view_students_university','UniversityController@view_students_university')->name('view_students_university')->middleware('permission:administrar_universidades');
+    Route::post('search_students','UniversityController@search_students')->name('search_students')->middleware('permission:administrar_universidades');
+    
+    Route::get('register_new_student','UniversityController@register_new_student')->name('register_new_student')->middleware('permission:administrar_universidades');
+
+    Route::get('register_new_student_group','UniversityController@register_new_student_group')->name('register_new_student_group')->middleware('permission:administrar_universidades');
+    
+    Route::post('store_students_uni','StudentController@store_students')->name('store_students_uni')->middleware('permission:administrar_universidades');
+
+
+    Route::post('import-list-excel','StudentController@import_students')->name('users.import.excel');
+
 });
